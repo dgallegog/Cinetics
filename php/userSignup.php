@@ -6,7 +6,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     {
         registerOk(filter_input(INPUT_POST,'username'),filter_input(INPUT_POST,'password'),filter_input(INPUT_POST,'firstname'),filter_input(INPUT_POST,'lastname'),filter_input(INPUT_POST,'email'));
     }
+
 }
+header('Location: ../login-form-20/index.html');
 
 
 function registerOk ($user,$pwd,$firstname,$lastname,$email)
@@ -16,14 +18,5 @@ function registerOk ($user,$pwd,$firstname,$lastname,$email)
     $pwd = password_hash($pwd,PASSWORD_DEFAULT);
     $sql = "INSERT INTO `users`(mail, username, passHash, userFirstName, userLastName) VALUES ('$email','$user','$pwd','$firstname','$lastname')";
     $insert = $db->query($sql);
-    
-    if($insert)
-    {
-        echo '<p> insert correcto</p>';
-    }else{
-        print_r($db->errorinfo());
-    }
-    
-   
-    
+  
 }
