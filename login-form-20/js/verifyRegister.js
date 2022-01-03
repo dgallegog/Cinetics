@@ -15,14 +15,7 @@ function isValidForm() {
     } else if (pw.length > 15) {
         alert("**Password length must not exceed 15 characters");
         return false;
-    } else if (validateEmail(document.getElementById("email").value)) {
-        alert("**Wrong mail format");
-        return false;
-    }
+    } 
 
 }
 
-function validateEmail(email) {
-    var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return re.test(email);
-}
