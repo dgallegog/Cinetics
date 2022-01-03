@@ -18,5 +18,7 @@ function registerOk ($user,$pwd,$firstname,$lastname,$email)
     $pwd = password_hash($pwd,PASSWORD_DEFAULT);
     $sql = "INSERT INTO `users`(mail, username, passHash, userFirstName, userLastName) VALUES ('$email','$user','$pwd','$firstname','$lastname')";
     $insert = $db->query($sql);
+
+    if($insert)header('Location: ../index.html');
   
 }
