@@ -1,8 +1,8 @@
 <?php
-
+require_once('conexionDB.php'); 
 function loginOK ($user,$pwd)
 {
-    require_once('conexionDB.php'); 
+    $db = connectaDB();
     $okloguejat=FALSE;
     
     $sql = 'SELECT username, passHash FROM `users` WHERE username= ?';
