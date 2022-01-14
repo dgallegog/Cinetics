@@ -12,13 +12,12 @@ CREATE TABLE IF NOT EXISTS `users`(
     `creationDate` DATETIME DEFAULT NOW(), 
     `removeDate` DATETIME,
     `lastSignIn` DATETIME,
-    `active` TINYINT(1),
+    `active` TINYINT(1) DEFAULT 0,
     `is_admin` TINYINT(1) NOT NULL DEFAULT 0,
-    `activation_code` VARCHAR(255) NOT NULL,
-    `activation_expiry` DATETIME NOT NULL,
-    `activated_at` DATETIME DEFAULT NULL,
-    `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-    `updated_at` DATETIME DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+    `activationCode` VARCHAR(255) NOT NULL,
+    `activationExpiry` DATETIME NOT NULL,
+    `activationDate` DATETIME DEFAULT NULL,
+    `resetPassCode` VARCHAR(255) NOT NULL,
     PRIMARY KEY(`iduser`)
 );
 
