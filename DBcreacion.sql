@@ -12,7 +12,11 @@ CREATE TABLE IF NOT EXISTS `users`(
     `creationDate` DATETIME DEFAULT NOW(), 
     `removeDate` DATETIME,
     `lastSignIn` DATETIME,
-    `active` TINYINT(1),
+    `active` TINYINT(1) DEFAULT 0,
+    `is_admin` TINYINT(1) NOT NULL DEFAULT 0,
+    `activationCode` VARCHAR(255) NOT NULL,
+    `activationExpiry` DATETIME NOT NULL,
+    `activationDate` DATETIME DEFAULT NULL,
+    `resetPassCode` VARCHAR(255) NOT NULL,
     PRIMARY KEY(`iduser`)
 );
-

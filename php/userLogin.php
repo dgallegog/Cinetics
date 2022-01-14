@@ -8,8 +8,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         if(loginOK(filter_input(INPUT_POST,'user'),filter_input(INPUT_POST,'password')))
         {
             session_start();
-            setcookie('user',$_POST['user']);
-            setcookie('password',$_POST['password']);
+            $_SESSION["user"] = $_POST['user'];
+                      
             
             header('Location: ./mainpage.php');
         }
@@ -18,4 +18,3 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
     
 }
-

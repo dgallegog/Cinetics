@@ -1,7 +1,7 @@
 <?php 
     require_once('checkLogin.php'); 
     session_start();
-    if(!loginOK(filter_input(INPUT_COOKIE,'user'),filter_input(INPUT_COOKIE,'password')))header('Location: ../login-form-20/index.html');
+   
     
     
 
@@ -36,7 +36,7 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-md-6 text-center mb-5">
-                    <h2 class="heading-section">Welcome <?php  print_r($_COOKIE['user']) ?> to Cinetics</h2>
+                    <h2 class="heading-section">Welcome <?php  print_r($_SESSION['user']) ?> to Cinetics</h2>
                 </div>
             </div>
             <div class="row justify-content-center">
