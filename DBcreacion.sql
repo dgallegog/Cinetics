@@ -20,4 +20,3 @@ CREATE TABLE IF NOT EXISTS `users`(
     `resetPassCode` VARCHAR(255) NOT NULL,
     PRIMARY KEY(`iduser`)
 );
-

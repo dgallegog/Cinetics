@@ -1,11 +1,16 @@
 <?php
-    //$cadena_connexio = 'mysql:dbname=cinetics;host=localhost:3307'; // Conexion Gerard
-    $cadena_connexio = 'mysql:dbname=cinetics;host=localhost'; //Conexion Gallego
+
+function connectaDB(){
+    $cadenaConnexio = 'mysql:dbname=cinetics;host=localhost:3307'; // Conexion Gerard
+    //$cadena_connexio = 'mysql:dbname=cinetics;host=localhost'; //Conexion Gallego
     $usuari = 'root';
     $passwd = '';
     try{
-        $db = new PDO($cadena_connexio, $usuari, $passwd, 
+        $db = new PDO($cadenaConnexio, $usuari, $passwd, 
                         array(PDO::ATTR_PERSISTENT => true));
+        return $db;
     }catch(PDOException $e){
         echo 'Error amb la BDs: ' . $e->getMessage();
+        return $e;
     }
+}
