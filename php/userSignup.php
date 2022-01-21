@@ -17,10 +17,10 @@ function registerOk ($user,$pwd,$firstname,$lastname,$email)
 {
     $db=connectaDB();
     $pwd = password_hash($pwd,PASSWORD_DEFAULT);
-    $sql = "INSERT INTO `users` (`mail`, `username`, `passHash`, `userFirstName`, `userLastName`) VALUES (:mail,:user,:pwd,:firstname,:lastname)";
-  
+    $activationCode = hash('sha256','El codi per activar es'.random_int(1,999));
+    $sql = "INSERT INTO `users` (`mail`, `username`, `passHash`, `userFirstName`, `userLastName`,`activationCode`) VALUES (:mail,:user,:pwd,:firstname,:lastname,:activationcode)";  
         $insert=$db->prepare($sql);
-        $insert->execute(array(':mail'=>$email,':user'=>$user,':pwd'=>$pwd,':firstname'=>$firstname,':lastname'=>$lastname));
+        $insert->execute(array(':mail'=>$email,':user'=>$user,':pwd'=>$pwd,':firstname'=>$firstname,':lastname'=>$lastname, ':activationcode'=>$activationCode));
 
     if($insert)header('Location: ../index.php');
   

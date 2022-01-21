@@ -9,5 +9,5 @@
     setcookie(session_name(),"",time()-3600,"/");
 
     //Redirecció a Login
-    header('Location: ../login-form-20/index.html');
+    header('Location: ../login-form-20/index.php');
     exit;
