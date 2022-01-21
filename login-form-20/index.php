@@ -5,7 +5,7 @@ $_SESSION = array();
 session_destroy();
 function controlError($err){
     switch($err){
-        case 0: $string="<script type=\"text/javascript\">var e =alert('Usuario registrado correctamente');</script>";break;
+        case 0: $string="<script type=\"text/javascript\">var e =alert('Usuario registrado correctamente, activa tu cuenta en tu mail');</script>";break;
         case 1: $string="<script type=\"text/javascript\">var e =alert('El usuario y mail introducidos ya existen');</script>";break;
         case 2: $string="<script type=\"text/javascript\">var e =alert('El usuario introducido ya existe');</script>";break;
         case 3: $string="<script type=\"text/javascript\">var e =alert('El mail introducido ya existe');</script>";break;
