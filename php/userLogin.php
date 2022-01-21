@@ -13,7 +13,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             
             header('Location: ./mainpage.php');
         }
-        else header('Location: ../login-form-20/index.html');
+        else header('Location: ../login-form-20/index.php');
     }
 
     

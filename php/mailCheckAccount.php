@@ -8,7 +8,7 @@ require_once('conexionDB.php');
     $activationCode = filter_input(INPUT_GET,'activationCode');
 
     $db = connectaDB();
-    $sql = 'SELECT `*` FROM `users` WHERE `mail`= :mail && `activationCode`= :activationCode';
+    $sql = 'SELECT * FROM `users` WHERE `mail`=:mail AND `activationCode`=:activationCode';
     $codigoOK = $db->prepare($sql);
     $codigoOK->execute(array(':mail'=>$mail,':activationCode'=>$activationCode));
     
@@ -17,7 +17,10 @@ require_once('conexionDB.php');
         {
             $sql = 'UPDATE `users` SET `activationCode`="", `active`=1, `activationDate`= now() WHERE `mail`=:mail';
             $update = $db->prepare($sql);
-            $update->execute($mail);
+            $update->execute(array(':mail'=>$mail));
+            session_start();
+            $_SESSION["verificat"] = TRUE;
+            header('Location: ../login-form-20/index.php');
         }
     
 }

@@ -8,12 +8,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $errCode=comprobarExistentes(filter_input(INPUT_POST,'username'),filter_input(INPUT_POST,'email'));
         if(!$errCode) 
         {
-            registerOk(filter_input(INPUT_POST,'username'),filter_input(INPUT_POST,'password'),filter_input(INPUT_POST,'firstname'),filter_input(INPUT_POST,'lastname'),filter_input(INPUT_POST,'email'));
-            
-        }
-       
+            registerOk(filter_input(INPUT_POST,'username'),filter_input(INPUT_POST,'password'),filter_input(INPUT_POST,'firstname'),filter_input(INPUT_POST,'lastname'),filter_input(INPUT_POST,'email'));          
+        }       
     }
-
 }
 header('Location: ../login-form-20/index.php');
 
@@ -26,7 +23,6 @@ function registerOk ($user,$pwd,$firstname,$lastname,$email)
     $sql = "INSERT INTO `users` (`mail`, `username`, `passHash`, `userFirstName`, `userLastName`,`activationCode`) VALUES (:mail,:user,:pwd,:firstname,:lastname,:activationcode)";  
         $insert=$db->prepare($sql);
         $insert->execute(array(':mail'=>$email,':user'=>$user,':pwd'=>$pwd,':firstname'=>$firstname,':lastname'=>$lastname, ':activationcode'=>$activationCode));
-        
     if($insert)
     {
         sendMail($activationCode,$email);
