@@ -1,8 +1,8 @@
 <?php
 
 function connectaDB(){
-    $cadenaConnexio = 'mysql:dbname=cinetics;host=localhost:3307'; // Conexion Gerard
-    //$cadena_connexio = 'mysql:dbname=cinetics;host=localhost'; //Conexion Gallego
+    //$cadenaConnexio = 'mysql:dbname=cinetics;host=localhost:3307'; // Conexion Gerard
+    $cadenaConnexio = 'mysql:dbname=cinetics;host=localhost'; //Conexion Gallego
     $usuari = 'root';
     $passwd = '';
     try{
