@@ -1,5 +1,7 @@
 <?php
-    use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\PHPMailer;
+function sendMail ($activationCode,$destinatario)
+{  
     require 'vendor/autoload.php';
     $mail = new PHPMailer();
     $mail->IsSMTP();
@@ -13,18 +15,18 @@
     $mail->Port = 587;
     
     //Credencials del compte GMAIL
-    $mail->Username = 'gerard.fernandezm@educem.net';
-    $mail->Password = 'pass';
+    $mail->Username = 'cinetics.noreply@gmail.com';
+    $mail->Password = 'cineticsdager';
 
     //Dades del correu electrònic
-    $mail->SetFrom('fulanito@gmail.com','Yo mismo');
-    $mail->Subject = 'Prueba de spam';
-    $mail->MsgHTML('Prova');
+    $mail->SetFrom('cinetics.noreply@gmail.com','Cinetics');
+    $mail->Subject = 'Activa tu cuenta ahora!!!!!';
+    $mail->MsgHTML('<h1>Activa tu cuenta clicando <a href="http://localhost/Cinetics-master/php/mailCheckAccount.php?activationCode='.$activationCode.'&mail='.$destinatario.'">aqui!</a></h1> ');
     //$mail->addAttachment("fitxer.pdf");
     
     //Destinatari
-    $address = 'destinatario@gmail.com';
-    $mail->AddAddress($address, 'Test');
+    
+    $mail->AddAddress($destinatario, 'Destinatario');
 
     //Enviament
     $result = $mail->Send();
@@ -33,3 +35,5 @@
     }else{
         echo "Correu enviat";
     }
+}
+   
