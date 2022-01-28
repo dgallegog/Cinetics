@@ -139,7 +139,7 @@ function controlVerificat($verificat){
                 <div class="card-heading modal-header border-0"></div>
                 <div class="card-body">
                     <h2 class="title modal-title" id="forgotModal">Forgort your Password Info</h2>
-                    <form method="POST" onsubmit="return isValidForm()" action="../php/resetPasswordSend.php" class="modal-body">
+                    <form method="POST"  action="../php/resetPasswordSend.php" class="modal-body">
 
 
                         <div class="input-group">
