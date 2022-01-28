@@ -21,7 +21,7 @@ function sendMail ($activationCode,$destinatario)
     //Dades del correu electrònic
     $mail->SetFrom('cinetics.noreply@gmail.com','Cinetics');
     $mail->Subject = 'Activa tu cuenta ahora!!!!!';
-    $mail->MsgHTML('<h1>Activa tu cuenta clicando <a href="http://localhost/Cinetics-master/php/mailCheckAccount.php?activationCode='.$activationCode.'&mail='.$destinatario.'">aqui!</a></h1><img src="https://i.ibb.co/dJJm0jK/favicon.png" alt="Log" width="500" height="600"> ');
+    $mail->MsgHTML('<h1>Activa tu cuenta clicando <a href="http://localhost/Cinetics-master/php/mailCheckAccount.php?activationCode='.$activationCode.'&mail='.$destinatario.'">aqui!</a></h1> ');
     //$mail->addAttachment("fitxer.pdf");
     
     //Destinatari
@@ -32,8 +32,6 @@ function sendMail ($activationCode,$destinatario)
     $result = $mail->Send();
     if(!$result){
         echo 'Error: ' . $mail->ErrorInfo;
-    }else{
-        echo "Correu enviat";
     }
 }
    

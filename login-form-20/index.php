@@ -73,11 +73,12 @@ function controlVerificat($verificat){
 								</label>
                                 </div>
                                 <div class="w-50 text-md-right">
-                                    <a href="#" style="color: #fff">Forgot Password</a>
+                                    <a href="#" style="color: #fff"><p class="w-100 text-center" data-toggle="modal" data-target="#forgotModal">Forgot Password</p></a>
+                                    
                                 </div>
                             </div>
                         </form>
-                        <p class="w-100 text-center" data-toggle="modal" data-target="#registerModal">&mdash; Or Register &mdash;</p>
+                        <a href="#" style="color: #fff"><p class="w-100 text-center" data-toggle="modal" data-target="#registerModal">Register</p></a>
 
                     </div>
                 </div>
@@ -130,6 +131,32 @@ function controlVerificat($verificat){
                 </div>
             </div>
         </div>
+    </div>
+
+    <div class="page-wrapper  p-5 font-poppins modal fade center" id="forgotModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="wrapper wrapper--w780 modal-dialog" role="document">
+            <div class="card card-3 modal-content">
+                <div class="card-heading modal-header border-0"></div>
+                <div class="card-body">
+                    <h2 class="title modal-title" id="forgotModal">Forgort your Password Info</h2>
+                    <form method="POST" onsubmit="return isValidForm()" action="../php/resetPasswordSend.php" class="modal-body">
+
+
+                        <div class="input-group">
+                            <input class="input--style-3" type="username" placeholder="Username" name="username">
+                        </div>
+
+                        <div class="input-group">
+                            <input class="input--style-3" type="email" id="email2" placeholder="Email" name="email">
+                        </div>
+                        <div class="p-t-10">
+                            <button class="btn btn--pill btn--green" type="submit">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
 
