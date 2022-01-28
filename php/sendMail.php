@@ -1,6 +1,6 @@
 <?php
 use PHPMailer\PHPMailer\PHPMailer;
-function sendMail ($activationCode,$destinatario)
+function sendMail ($destinatario,$subject,$mensaje)
 {  
     require 'vendor/autoload.php';
     $mail = new PHPMailer();
@@ -20,8 +20,8 @@ function sendMail ($activationCode,$destinatario)
 
     //Dades del correu electrònic
     $mail->SetFrom('cinetics.noreply@gmail.com','Cinetics');
-    $mail->Subject = 'Activa tu cuenta ahora!!!!!';
-    $mail->MsgHTML('<h1>Activa tu cuenta clicando <a href="http://localhost/Cinetics-master/php/mailCheckAccount.php?activationCode='.$activationCode.'&mail='.$destinatario.'">aqui!</a></h1> ');
+    $mail->Subject = $subject;
+    $mail->MsgHTML($mensaje);
     //$mail->addAttachment("fitxer.pdf");
     
     //Destinatari
