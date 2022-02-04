@@ -42,9 +42,7 @@ require_once('conexionDB.php');
           
             if($linies>0&&date("Y-m-d H:i:s")<$expira)
             {                
-                $_SESSION['passcode'] = $resetCode;
-
-                
+                $_SESSION['passcode'] = $resetCode;       
             }
         
     }else
