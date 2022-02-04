@@ -20,3 +20,34 @@ CREATE TABLE IF NOT EXISTS `users`(
     `resetPassCode` VARCHAR(255) DEFAULT NULL,
     PRIMARY KEY(`iduser`)
 );
+
+CREATE TABLE IF NOT EXISTS `videos`(
+    `idVideo` INT AUTO_INCREMENT NOT NULL,
+    `likes` INT UNSIGNED,
+    `dislikes` INT UNSIGNED,
+    `path` VARCHAR(300) NOT NULL,
+    `description` VARCHAR(300) NOT NULL,
+    `uploadDate` DATETIME DEFAULT NOW(),
+    `usersIduser` INT, 
+    PRIMARY KEY(`idVideo`),
+
+    CONSTRAINT `fk_videos_users` FOREIGN KEY (`usersIduser`) REFERENCES `users`(`iduser`)
+        ON UPDATE CASCADE ON DELETE NO ACTION
+);
+
+CREATE TABLE IF NOT EXISTS `hashtags`(
+    `idHashtag` INT AUTO_INCREMENT NOT NULL,
+    `tag` VARCHAR(30),
+    PRIMARY KEY(`idHashtag`)
+);
+
+CREATE TABLE IF NOT EXISTS `videoHashtags`(
+    `videosIdVideo` INT,
+    `hashtagsIdHashtag` INT,
+    PRIMARY KEY (`videosIdVideo`,`hashtagsIdHashtag`),
+
+    CONSTRAINT `fk_videoHashtags_videos` FOREIGN KEY (`videosIdVideo`) REFERENCES `videos`(`idVideo`)
+        ON UPDATE CASCADE ON DELETE NO ACTION,
+    CONSTRAINT `fk_videoHashtags_hashtags` FOREIGN KEY (`hashtagsIdHashtag`) REFERENCES `hashtags`(`idHashtag`)
+    ON UPDATE CASCADE ON DELETE CASCADE
+);
