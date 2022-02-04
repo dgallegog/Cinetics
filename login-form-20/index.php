@@ -1,7 +1,6 @@
 <?php 
 session_start();
-if (isset($_SESSION["verificat"]))echo controlVerificat($_SESSION["verificat"]);
-elseif (isset($_SESSION["error"]))echo controlError($_SESSION["error"]);
+if (isset($_SESSION["error"]))echo controlError($_SESSION["error"]);
 $_SESSION = array();
 session_destroy();
 function controlError($err){
@@ -10,17 +9,12 @@ function controlError($err){
         case 1: $string="<script type=\"text/javascript\">var e =alert('El usuario y mail introducidos ya existen');</script>";break;
         case 2: $string="<script type=\"text/javascript\">var e =alert('El usuario introducido ya existe');</script>";break;
         case 3: $string="<script type=\"text/javascript\">var e =alert('El mail introducido ya existe');</script>";break;
+        case 4: $string="<script type=\"text/javascript\">var e =alert('El password no mide 8 caracteres');</script>";break;
+        case 50: $string="<script type=\"text/javascript\">var e =alert('Usuario verificado correctamente. Cuenta activada');</script>";break;
+        case 90: $string="<script type=\"text/javascript\">var e =alert('Contraseña reseteada. Ya puedes loguear con tu nueva contraseña');</script>";break;
     }
     return $string;
 }
-function controlVerificat($verificat){
-    if ($verificat)
-    {
-        $string="<script type=\"text/javascript\">var e =alert('Usuario verificado correctamente. Cuenta activada');</script>";
-    }
-    return $string;
-}
-
 ?>
 
 <!doctype html>

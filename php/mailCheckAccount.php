@@ -19,6 +19,7 @@ require_once('conexionDB.php');
             $update = $db->prepare($sql);
             $update->execute(array(':mail'=>$mail));
             session_start();
+            $_SESSION["error"] = 50;
             $_SESSION["verificat"] = TRUE;
             header('Location: ../login-form-20/index.php');
         }

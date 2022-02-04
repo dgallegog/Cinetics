@@ -1,37 +1,56 @@
 <?php
 require_once('conexionDB.php'); 
+    session_start();
+    if($_SERVER["REQUEST_METHOD"] == "POST")
+    {
+        $resetPassCode = $_SESSION['passcode'];
+        $db = connectaDB();
 
-
-    if($_SERVER["REQUEST_METHOD"] == "GET"){
-    
-    $mail = filter_input(INPUT_GET,'mail');
-    $resetCode = filter_input(INPUT_GET,'resetCode');
-
-    $db = connectaDB();
-    $sql = 'SELECT * FROM `users` WHERE `mail`=:mail AND `resetPassCode`=:resetCode';
-    $codigoOK = $db->prepare($sql);
-    $codigoOK->execute(array(':mail'=>$mail,':resetCode'=>$resetCode));
-    $datos = $codigoOK->fetchAll();
-    // TODO comprobar datos
-    $expira = $datos[0]['resetPassExpiry'];
-
-    
-        $linies=$codigoOK->rowCount();
-        // TODO aqui tenemos que verificar si el NOW() actual es igual o inferior al resetPassExpiry de la BD, y añadirlo al if
-        if($linies>0&&date('YYYY-MM-DD hh:mm:ss')<$expira)
+        if(strlen($_POST['password'])>7)
         {
-            // TODO si entramos aqui tenemos que mostrar el formulario con contraseña y repetir contraseña para que el usuario ponga la nueva
-            // TODO y actualizar la BD con el pass nuevo, el query de abajo hay que modificarlo
-            // TODO para recoger la contraseña del form ( en caso que sean las mismas despues de que haya pulsado el boton)
-            // TODO y meterla en la BBDD
-            $sql = 'UPDATE `users` SET `resetPassCode`="" WHERE `mail`=:mail';
-            $update = $db->prepare($sql);
-            $update->execute(array(':mail'=>$mail));
-            header('Location: ../login-form-20/index.php');
+
+        
+        $newPass =password_hash(filter_input(INPUT_POST,'password'),PASSWORD_DEFAULT) ;
+        $sql = 'UPDATE `users` SET `resetPassCode`="",`passHash`= :pass WHERE `resetPassCode`=:resetCode';
+        $update = $db->prepare($sql);
+        $update->execute(array(':pass'=>$newPass,':resetCode'=>$resetPassCode));
+        session_start();
+        $_SESSION["error"] = 90;
+        
+        }else
+        {
+            $_SESSION["error"] = 4;
         }
+        header('Location: ../login-form-20/index.php');
+    }
+    else if($_SERVER["REQUEST_METHOD"] == "GET"){
     
-}
-  
+        $mail = filter_input(INPUT_GET,'mail');
+        $resetCode = filter_input(INPUT_GET,'resetCode');
+
+        $db = connectaDB();
+        $sql = 'SELECT * FROM `users` WHERE `mail`=:mail AND `resetPassCode`=:resetCode';
+        $codigoOK = $db->prepare($sql);
+        $codigoOK->execute(array(':mail'=>$mail,':resetCode'=>$resetCode));
+        $datos = $codigoOK->fetchAll();
+
+        if (isset($datos[0]['resetPassExpiry']))
+        {
+            $expira = $datos[0]['resetPassExpiry'];
+        } 
+            $linies=$codigoOK->rowCount();
+          
+            if($linies>0&&date("Y-m-d H:i:s")<$expira)
+            {                
+                $_SESSION['passcode'] = $resetCode;
+
+                
+            }
+        
+    }else
+    {
+        header('Location: ../login-form-20/index.php');
+    }
 ?>
 
 <html>
@@ -48,19 +67,19 @@ require_once('conexionDB.php');
 
 <div class="container">
 	<div class="row">
-		<div class="col-sm-4">
+		<div class="col-sm-4 center">
 		    
-		    <form method="POST"  onsubmit="return veripass()" action="x"  class="signin-form">
-                <label>New Password</label>
+		    <form method="POST"  onsubmit="return veripass()" action="<?php echo $_SERVER['PHP_SELF']; ?>"  class="signin-form">
+                <label >New Password</label>
                 <div class="form-group pass_show"> 
-                    <input type="password"  class="form-control" name = "password"  id="pswd"placeholder="New Password"> 
+                    <input type="password"  class="form-control " name = "password"  id="pswd"placeholder="New Password"> 
                 </div> 
                 <label>Confirm Password</label>
                 <div class="form-group pass_show"> 
-                    <input type="password"  class="form-control" id="verifypswd" placeholder="Confirm Password"> 
+                    <input type="password"  class="form-control " id="verifypswd" placeholder="Confirm Password"> 
                 </div>
                 <div class="form-group">
-                    <button type="submit" class="form-control btn btn-primary submit px-3">Reset Password</button>
+                    <button type="submit" class="form-control btn btn-primary submit px-3 ">Reset Password</button>
                 </div> 
             </form>
 		</div>  

@@ -16,3 +16,11 @@
 .pass_show .ptxt:hover {
     color: #333333;
 }
+
+.center {
+    margin: auto;
+    margin-top: 20%;
+    width: 50%;
+    
+    padding: 10px;
+  }
