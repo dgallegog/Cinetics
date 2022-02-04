@@ -12,7 +12,8 @@ require_once('conexionDB.php');
     $codigoOK = $db->prepare($sql);
     $codigoOK->execute(array(':mail'=>$mail,':resetCode'=>$resetCode));
     $datos = $codigoOK->fetchAll();
-    $expira = $datos[0]['x'];
+    // TODO comprobar datos
+    $expira = $datos[0]['resetPassExpiry'];
 
     
         $linies=$codigoOK->rowCount();

@@ -25,7 +25,7 @@ function registerOk ($user,$pwd,$firstname,$lastname,$email)
         $insert->execute(array(':mail'=>$email,':user'=>$user,':pwd'=>$pwd,':firstname'=>$firstname,':lastname'=>$lastname, ':activationcode'=>$activationCode));
     if($insert)
     {
-        sendMail($activationCode,$email,'Activa tu cuenta ahora!!!!!','<h1>Activa tu cuenta clicando <a href="http://localhost/Cinetics-master/php/mailCheckAccount.php?activationCode='.$activationCode.'&mail='.$email.'">aqui!</a></h1> ');
+        sendMail($email,'Activa tu cuenta ahora!!!!!','<h1>Activa tu cuenta clicando <a href="http://localhost/Cinetics-master/php/mailCheckAccount.php?activationCode='.$activationCode.'&mail='.$email.'">aqui!</a></h1> ');
         header('Location: ../index.php');
     }
   
