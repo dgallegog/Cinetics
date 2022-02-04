@@ -11,7 +11,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             $_SESSION["user"] = $_POST['user'];
                       
             
-            header('Location: ./mainpage.php');
+            header('Location: ../login-form-20/mainpage/index.php');
         }
         else header('Location: ../login-form-20/index.php');
     }
