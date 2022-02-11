@@ -1,15 +1,11 @@
 <?php 
-// Codigo Antiguo
-//session_start();
-//if (isset($_SESSION["error"]))echo controlError($_SESSION["error"]);
-//$_SESSION = array();
-//session_destroy();
-//Codigo Nuevo
 require_once('./php/errorControl.php');
 if (isset($_GET["error"]))
 {
     $error=filter_input(INPUT_GET,'error');
     echo controlError($error);
+    // El siguiente echo se encarga de limpiar la barra de navegación dejando la ruta base, para que el usuario no vea el GET del error.
+    echo "<script type=\"text/javascript\">window.history.pushState('index', 'Title', '/Cinetics-master/login-form-20/index.php');</script>";  
 }
 ?>
 
