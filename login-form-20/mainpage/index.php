@@ -1,8 +1,9 @@
 <?php 
 
-    require_once('../../php/checkLogin.php');   
+
+session_start();
     
-    session_start();
+if(!isset($_SESSION["user"]))header('Location: ../index.php'); 
 
 ?>
 
@@ -51,6 +52,13 @@
                         <li>
                             <i class="fas fa-user"></i>
                             <?php  print_r($_SESSION['user']) ?></li>
+                            <li>
+                            <span>|</span>
+                            </li>
+                            <li >
+                            <i class="fas fa-user"></i>
+                            <a href="../php/logOut.php">Log Out</a></li>
+
                     </ul>
                 </div>
             </div>

@@ -12,13 +12,9 @@ function loginOK ($user,$pwd)
         $linies=$usuaris->rowCount();
 
         if ($linies>0){
-            foreach ($usuaris as $fila) {
-            
-           
+            foreach ($usuaris as $fila) {      
                 if(password_verify($pwd,$fila['passHash']))$okloguejat=TRUE;
-    
-            }
-            
+            }       
         }    
     }
     return $okloguejat;

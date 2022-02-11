@@ -1,19 +1,15 @@
 <?php 
-session_start();
-if (isset($_SESSION["error"]))echo controlError($_SESSION["error"]);
-$_SESSION = array();
-session_destroy();
-function controlError($err){
-    switch($err){
-        case 0: $string="<script type=\"text/javascript\">var e =alert('Usuario registrado correctamente, activa tu cuenta en tu mail');</script>";break;
-        case 1: $string="<script type=\"text/javascript\">var e =alert('El usuario y mail introducidos ya existen');</script>";break;
-        case 2: $string="<script type=\"text/javascript\">var e =alert('El usuario introducido ya existe');</script>";break;
-        case 3: $string="<script type=\"text/javascript\">var e =alert('El mail introducido ya existe');</script>";break;
-        case 4: $string="<script type=\"text/javascript\">var e =alert('El password no mide 8 caracteres');</script>";break;
-        case 50: $string="<script type=\"text/javascript\">var e =alert('Usuario verificado correctamente. Cuenta activada');</script>";break;
-        case 90: $string="<script type=\"text/javascript\">var e =alert('Contraseña reseteada. Ya puedes loguear con tu nueva contraseña');</script>";break;
-    }
-    return $string;
+// Codigo Antiguo
+//session_start();
+//if (isset($_SESSION["error"]))echo controlError($_SESSION["error"]);
+//$_SESSION = array();
+//session_destroy();
+//Codigo Nuevo
+require_once('./php/errorControl.php');
+if (isset($_GET["error"]))
+{
+    $error=filter_input(INPUT_GET,'error');
+    echo controlError($error);
 }
 ?>
 
@@ -48,7 +44,7 @@ function controlError($err){
                 <div class="col-md-6 col-lg-4">
                     <div class="login-wrap p-0">
                         <h3 class="mb-4 text-center">Have an account?</h3>
-                        <form action="../php/userLogin.php" method="POST" class="signin-form">
+                        <form action="./php/userLogin.php" method="POST" class="signin-form">
                             <div class="form-group">
                                 <input type="text" class="form-control" name="user" placeholder="Username" required>
                             </div>
@@ -86,7 +82,7 @@ function controlError($err){
                 <div class="card-heading modal-header border-0"></div>
                 <div class="card-body">
                     <h2 class="title modal-title" id="registerModal">Registration Info</h2>
-                    <form method="POST" onsubmit="return isValidForm()" action="../php/userSignup.php" class="modal-body">
+                    <form method="POST" onsubmit="return isValidForm()" action="./php/userSignup.php" class="modal-body">
 
 
                         <div class="input-group">
@@ -133,7 +129,7 @@ function controlError($err){
                 <div class="card-heading modal-header border-0"></div>
                 <div class="card-body">
                     <h2 class="title modal-title" id="forgotModal">Forgort your Password Info</h2>
-                    <form method="POST"  action="../php/resetPasswordSend.php" class="modal-body">
+                    <form method="POST"  action="./php/resetPasswordSend.php" class="modal-body">
 
 
                         <div class="input-group">
