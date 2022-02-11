@@ -2,8 +2,10 @@
 require_once('./php/errorControl.php');
 if (isset($_GET["error"]))
 {
-    $error=filter_input(INPUT_GET,'error');
-    echo controlError($error);
+    // Codigo antiguo
+    //$error=filter_input(INPUT_GET,'error');
+    //echo controlError($error);
+
     // El siguiente echo se encarga de limpiar la barra de navegación dejando la ruta base, para que el usuario no vea el GET del error.
     echo "<script type=\"text/javascript\">window.history.pushState('index', 'Title', '/Cinetics-master/login-form-20/index.php');</script>";  
 }
@@ -39,7 +41,10 @@ if (isset($_GET["error"]))
             <div class="row justify-content-center">
                 <div class="col-md-6 col-lg-4">
                     <div class="login-wrap p-0">
-                        <h3 class="mb-4 text-center">Have an account?</h3>
+                        
+                    <h3 class="mb-4 text-center">Have an account?</h3>
+                    <!-- Introducimos esta linea para mostrar las notificaciones en funcion de si llega un "error" por GET  -->
+                    <h4 class="mb-4 text-center alert-warning"<?php if(!isset($_GET["error"])) echo "hidden=true";?>> <?php echo controlError(filter_input(INPUT_GET,'error')); ?> </h4>
                         <form action="./php/userLogin.php" method="POST" class="signin-form">
                             <div class="form-group">
                                 <input type="text" class="form-control" name="user" placeholder="Username" required>
@@ -124,7 +129,7 @@ if (isset($_GET["error"]))
             <div class="card card-3 modal-content">
                 <div class="card-heading modal-header border-0"></div>
                 <div class="card-body">
-                    <h2 class="title modal-title" id="forgotModal">Forgort your Password Info</h2>
+                    <h2 class="title modal-title" id="forgotModal">Reset your Password</h2>
                     <form method="POST"  action="./php/resetPasswordSend.php" class="modal-body">
 
 
