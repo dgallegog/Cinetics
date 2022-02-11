@@ -16,11 +16,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             if($insert)
             {
                 
-                sendMail($email,'Activa tu cuenta ahora!!!!!','<h1>Activa tu cuenta clicando <a href="http://localhost/Cinetics-master/login-form-20/php/activaCuenta.php?activationCode='.$activationCode.'&mail='.$email.'">aqui!</a></h1> ');
-                
+                sendMail($email,'Activa tu cuenta ahora!!!!!','<h1>Activa tu cuenta clicando <a href="http://localhost/Cinetics-master/login-form-20/php/activaCuenta.php?activationCode='.$activationCode.'&mail='.$email.'">aqui!</a></h1> ');                
             }       
-        }        
+        }
         header('Location: ../index.php?error='.$errCode);
+        exit;        
     }
 }
 header('Location: ../index.php');

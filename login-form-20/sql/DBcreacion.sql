@@ -32,7 +32,7 @@ CREATE TABLE IF NOT EXISTS `videos`(
     PRIMARY KEY(`idVideo`),
 
     CONSTRAINT `fk_videos_users` FOREIGN KEY (`usersIduser`) REFERENCES `users`(`iduser`)
-        ON UPDATE CASCADE ON DELETE NO ACTION
+        ON UPDATE CASCADE ON DELETE SET NULL
 );
 
 CREATE TABLE IF NOT EXISTS `hashtags`(
@@ -47,7 +47,7 @@ CREATE TABLE IF NOT EXISTS `videoHashtags`(
     PRIMARY KEY (`videosIdVideo`,`hashtagsIdHashtag`),
 
     CONSTRAINT `fk_videoHashtags_videos` FOREIGN KEY (`videosIdVideo`) REFERENCES `videos`(`idVideo`)
-        ON UPDATE CASCADE ON DELETE NO ACTION,
+        ON UPDATE CASCADE ON DELETE CASCADE,
     CONSTRAINT `fk_videoHashtags_hashtags` FOREIGN KEY (`hashtagsIdHashtag`) REFERENCES `hashtags`(`idHashtag`)
     ON UPDATE CASCADE ON DELETE CASCADE
 );
