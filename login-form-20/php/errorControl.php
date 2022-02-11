@@ -10,5 +10,5 @@ function controlError($err){
         case 90: $string="<script type=\"text/javascript\">var e =alert('Contraseña reseteada. Ya puedes loguear con tu nueva contraseña');</script>";break;
     }
     return $string;
-}
+}$string2=""
 ?>

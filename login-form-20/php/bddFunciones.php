@@ -69,8 +69,6 @@ function registerOk ($user,$pwd,$firstname,$lastname,$email,$activationCode)
     $sql = "INSERT INTO `users` (`mail`, `username`, `passHash`, `userFirstName`, `userLastName`,`activationCode`) VALUES (:mail,:user,:pwd,:firstname,:lastname,:activationcode)";  
         $insert=$db->prepare($sql);
         $insert->execute(array(':mail'=>$email,':user'=>$user,':pwd'=>$pwd,':firstname'=>$firstname,':lastname'=>$lastname, ':activationcode'=>$activationCode));
-
-
         return $insert;
   
 }
@@ -81,7 +79,6 @@ function updateLastSignIn ($user)
     $update = $db->prepare($sql);
     $update->execute(array(':user'=>$user));
 
-  
 }
 
 function comprobarExistentes($user,$email){
@@ -100,34 +97,22 @@ function comprobarExistentes($user,$email){
     if($usuariRepetits&&$emailRepetits)$error=1; //Ambos Repetidos
     elseif($usuariRepetits)$error=2; //user Repetidos
     elseif($emailRepetits) $error=3; // Mail repetido
-    
-    
 
     return $error;
 }
 
 function resetPassPost($resetPassCode,$password)
 {
-
-
     $db = connectaDB();
-
     if(strlen($password)>7)
-    {
-
-    
-    $newPass =password_hash($password,PASSWORD_DEFAULT) ;
-    $sql = 'UPDATE `users` SET `resetPassCode`="",`passHash`= :pass WHERE `resetPassCode`=:resetCode';
-    $update = $db->prepare($sql);
-    $update->execute(array(':pass'=>$newPass,':resetCode'=>$resetPassCode));
-    return 90;
-    
-    }else
-    {
-        return 4;
+    {  
+        $newPass =password_hash($password,PASSWORD_DEFAULT) ;
+        $sql = 'UPDATE `users` SET `resetPassCode`="",`passHash`= :pass WHERE `resetPassCode`=:resetCode';
+        $update = $db->prepare($sql);
+        $update->execute(array(':pass'=>$newPass,':resetCode'=>$resetPassCode));
+        return 90;  
     }
-    
-    
+    return 4;
 }
 
 function resetPassGet($mail,$resetCode)
@@ -149,8 +134,6 @@ function resetPassGet($mail,$resetCode)
         {                
             $resetCode = 0;       
         }
-
-
         return $resetCode;
 }
 
