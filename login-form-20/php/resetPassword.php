@@ -13,8 +13,7 @@ require_once('errorControl.php');
             header('Location: ../index.php?error='.$error);
         }
         else {
-            //header('Location: ./resetPassword.php?error=4'); // TODO, NO VA
-            echo alertError(4);
+            echo controlError(4);
         }   
         
 
@@ -45,9 +44,7 @@ require_once('errorControl.php');
 <div class="container">
 	<div class="row">
 		<div class="col-sm-4 center">
-            <!-- TODO NO VA -->
-        <h4 class="mb-4 text-center alert-warning"<?php if(!isset($_GET["error"])) echo "hidden=true";?>> <?php echo controlError(filter_input(INPUT_GET,'error')); ?> </h4>
-           <form method="POST"  onsubmit="return veripass()" action="<?php echo $_SERVER['PHP_SELF']; ?>"  class="signin-form">
+             <form method="POST"  onsubmit="return veripass()" action="<?php echo $_SERVER['PHP_SELF']; ?>"  class="signin-form">
                 <label >New Password</label>
                 <div class="form-group pass_show"> 
                     <input type="password"  class="form-control " name = "password"  id="pswd"placeholder="New Password"> 

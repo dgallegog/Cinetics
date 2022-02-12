@@ -2,10 +2,6 @@
 require_once('./php/errorControl.php');
 if (isset($_GET["error"]))
 {
-    // Codigo antiguo
-    //$error=filter_input(INPUT_GET,'error');
-    //echo controlError($error);
-
     // El siguiente echo se encarga de limpiar la barra de navegación dejando la ruta base, para que el usuario no vea el GET del error.
     echo "<script type=\"text/javascript\">window.history.pushState('index', 'Title', '/Cinetics-master/login-form-20/index.php');</script>";  
 }
@@ -44,7 +40,7 @@ if (isset($_GET["error"]))
                         
                     <h3 class="mb-4 text-center">Have an account?</h3>
                     <!-- Introducimos esta linea para mostrar las notificaciones en funcion de si llega un "error" por GET  -->
-                    <h4 class="mb-4 text-center alert-warning"<?php if(!isset($_GET["error"])) echo "hidden=true";?>> <?php echo controlError(filter_input(INPUT_GET,'error')); ?> </h4>
+                    <?php if (isset($_GET["error"])) echo controlError(filter_input(INPUT_GET,'error'));?>
                         <form action="./php/userLogin.php" method="POST" class="signin-form">
                             <div class="form-group">
                                 <input type="text" class="form-control" name="user" placeholder="Username" required>
