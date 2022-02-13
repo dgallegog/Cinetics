@@ -1,6 +1,7 @@
 <?php
     require_once('bddFunciones.php'); 
     require_once('sendMail.php');
+    require_once('logsManager.php');
     if($_SERVER["REQUEST_METHOD"] == "POST")
     {
         $email = "";
@@ -29,6 +30,7 @@
         if($update->rowCount()>0)
         {
             sendMail($email,"Resetea tu password en Cinetics",'<h1>Resetea tu password <a href="http://localhost/Cinetics-master/login-form-20/php/resetPassword.php?resetCode='.$resetCode.'&mail='.$email.'">aqui!</a></h1> ');
+            logResetSend($email);
             header('Location: ../index.php?error=91');
         }
         else {

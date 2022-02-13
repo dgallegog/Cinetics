@@ -1,15 +1,17 @@
 <?php
 require_once('bddFunciones.php'); 
+require_once('logsManager.php');
 require_once('errorControl.php');
-   
+   // TODO no estamos verificando que los dos passwords coincidan!!
     if($_SERVER["REQUEST_METHOD"] == "POST")
     {
-       
+        $mail = filter_input(INPUT_POST,'mail');
         $resetCode = filter_input(INPUT_POST,'passcode');
         $password = filter_input(INPUT_POST,'password');
         $error=resetPassPost($resetCode,$password);
         if ($error==90)
         {
+            logResetOK($mail);
             header('Location: ../index.php?error='.$error);
         }
         else {
@@ -51,11 +53,12 @@ require_once('errorControl.php');
                 </div> 
                 <label>Confirm Password</label>
                 <div class="form-group pass_show"> 
-                    <input type="password"  class="form-control " id="verifypswd" placeholder="Confirm Password"> 
+                    <input type="password"  class="form-control " name = "verifypswd" id="verifypswd" placeholder="Confirm Password"> 
                 </div>
 
                 
                     <input id="passcode" name="passcode" type="hidden" value=<?php echo($resetCode) ?>>
+                    <input id="mail" name="mail" type="hidden" value=<?php echo($mail) ?>>
                 
 
                 <div class="form-group">

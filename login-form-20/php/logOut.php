@@ -1,7 +1,9 @@
 <?php
-
+    require_once('logsManager.php');
     //Ens unim a la sessió per poder-la liquidar
     session_start();
+    //Guardem log
+    logLogout($_SESSION["user"]);
     //Netegem les variables de sessió creades (nom de l'usuari)
     $_SESSION = array();
     //Destruïm la sessió en si mateixa (en el costat server)
