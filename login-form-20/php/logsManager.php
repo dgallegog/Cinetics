@@ -1,16 +1,7 @@
 <?php
-function logLoginOK($user) {
-    $log_filename = "../logs/login/OK";
-    $log_msg="[".date('H:i:s')."] Usuario: ".$user;
-    if (!file_exists($log_filename))
-    {
-        mkdir($log_filename, 0777, true);
-    }
-    $log_file_data = $log_filename.'/log_' . date('d-M-Y') . '.log';
-    file_put_contents($log_file_data, $log_msg . "\n", FILE_APPEND);
-}
-function logLoginKO($user) {
+function logLogin($user,$ok) {
     $log_filename = "../logs/login/KO";
+    if ($ok) $log_filename = "../logs/login/OK";
     $log_msg="[".date('H:i:s')."] Usuario: ".$user;
     if (!file_exists($log_filename))
     {
@@ -39,7 +30,7 @@ function logSignUp($user) {
     $log_file_data = $log_filename.'/log_' . date('d-M-Y') . '.log';
     file_put_contents($log_file_data, $log_msg . "\n", FILE_APPEND);
 }
-function logActivationSend($email) {
+function logActivationSend($email,$string) {
     $log_filename = "../logs/activation/send";
     $log_msg="[".date('H:i:s')."] Email: ".$email;
     if (!file_exists($log_filename))
