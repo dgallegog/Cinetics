@@ -112,7 +112,7 @@ if (isset($_GET["error"]))
 
                         </div>
                         <div class="p-t-10">
-                            <button class="btn btn--pill btn--green" type="submit">Submit</button>
+                            <button class="btn btn--pill btn--red" type="submit">Submit</button>
                         </div>
                     </form>
                 </div>
@@ -137,7 +137,7 @@ if (isset($_GET["error"]))
                             <input class="input--style-3" type="email" id="email2" placeholder="Email" name="email">
                         </div>
                         <div class="p-t-10">
-                            <button class="btn btn--pill btn--green" type="submit">Submit</button>
+                            <button class="btn btn--pill btn--red" type="submit">Submit</button>
                         </div>
                     </form>
                 </div>

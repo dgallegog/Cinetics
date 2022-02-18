@@ -3,7 +3,7 @@
     //Ens unim a la sessió per poder-la liquidar
     session_start();
     //Guardem log
-    logLogout($_SESSION["user"]);
+    generateLog($_SESSION["user"],2);
     //Netegem les variables de sessió creades (nom de l'usuari)
     $_SESSION = array();
     //Destruïm la sessió en si mateixa (en el costat server)

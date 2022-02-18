@@ -1,27 +1,27 @@
 <?php 
 
-    require_once('../../php/checkLogin.php');   
-    
     session_start();
+
+    if(!isset($_SESSION["user"]))header('Location: ../index.php'); 
 
 ?>
 
 <!doctype html>
 <html lang="en">
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>
-            Cinetics</title>
-            <link rel="icon" href="../images/favicon.png">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>
+                Cinetics</title>
+                <link rel="icon" href="../images/favicon.png">
 
-    <link rel="shortcut icon" href="assets/images/fav.jpg">
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/css/fontawsom-all.min.css">
-    <link rel="stylesheet" href="assets/css/animate.css">
-    <link rel="stylesheet" type="text/css" href="assets/css/style.css" />
-</head>
+        <link rel="shortcut icon" href="assets/images/fav.jpg">
+        <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+        <link rel="stylesheet" href="assets/css/fontawsom-all.min.css">
+        <link rel="stylesheet" href="assets/css/animate.css">
+        <link rel="stylesheet" type="text/css" href="assets/css/style.css" />
+    </head>
 
 <body>
   
@@ -45,9 +45,14 @@
                     <ul class="ulright">
                         <li>
                             <i class="fas fa-cloud-upload-alt"></i>
-                            Upload Video
+                            <a href="./uploadVideo.php">Upload Video
                             <span>|</span></li>
-                        <li>
+                            <a class="" href="#" >
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="../php/logOut.php">Log Out</a>
+
+                        </div>
+                        <li class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="fas fa-user"></i>
                             <?php  print_r($_SESSION['user']) ?></li>
                     </ul>
@@ -104,7 +109,7 @@
                 <div class="row">
                     <h2>Top Videos</h2>
                     <ul>
-                        <li> <a href="#"><i class="fas fa-home"></i> Home</a></li>
+                        <li> <a href="./index.php"><i class="fas fa-home"></i> Home</a></li>
                         <li><i class="fas fa-angle-double-right"></i> Videos</li>
                     </ul>
                 </div>
@@ -265,76 +270,21 @@
 
 
 
-  <!--####################### Quote Starts Here ###################-->
-  <div class="footer-ablove">
-    <div class="container">
-        <div class="row">
-            <p>Are you looking for a consultant for your Business
-                <button class="btn btn-default">Get Quote</button>
-            </p>
-        </div>
-    </div>
-</div>
+
    <!--####################### Footer Starts Here ###################-->
-      <footer class="footer">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-3 about col-sm-12">
-                    <h2><i class="fas fa-info-circle"></i> About Us</h2>
-                    <p>
-                        Smart Eye is a leading provider of information technology, consulting, and business process services. Our dedicated employees offer strategic insights, technological expertise and industry experience.
-                    </p>
-                   
-                </div>
-                <div class="col-md-3 col-sm-12">
-                    <h2><i class="fas fa-link"></i> Useful Links</h2>
-                    <ul class="list-unstyled link-list">
-                        <li><a ui-sref="about" href="#/about">About us</a><i class="fa fa-angle-right"></i></li>
-                        <li><a ui-sref="portfolio" href="#/portfolio">Portfolio</a><i class="fa fa-angle-right"></i></li>
-                        <li><a ui-sref="products" href="#/products">Latest jobs</a><i class="fa fa-angle-right"></i></li>
-                        <li><a ui-sref="gallery" href="#/gallery">Gallery</a><i class="fa fa-angle-right"></i></li>
-                        <li><a ui-sref="contact" href="#/contact">Contact us</a><i class="fa fa-angle-right"></i></li>
-                    </ul>
-                </div>
-                <div class="col-md-3 col-sm-12">
-                    <h2><i class="fas fa-life-ring"></i> Get Support</h2>
-                    <ul class="list-unstyled link-list">
-                        <li><a ui-sref="about" href="#/about">About us</a><i class="fa fa-angle-right"></i></li>
-                        <li><a ui-sref="portfolio" href="#/portfolio">Portfolio</a><i class="fa fa-angle-right"></i></li>
-                        <li><a ui-sref="products" href="#/products">Latest jobs</a><i class="fa fa-angle-right"></i></li>
-                        <li><a ui-sref="gallery" href="#/gallery">Gallery</a><i class="fa fa-angle-right"></i></li>
-                        <li><a ui-sref="contact" href="#/contact">Contact us</a><i class="fa fa-angle-right"></i></li>
-                    </ul>
-                </div>
-                <div class="col-md-3 col-sm-12 map-img">
-                    <h2><i class="fas fa-map-marker-alt"></i> Contact Us</h2>
-                    <address class="md-margin-bottom-40">
-                        BlueDart <br>
-                        Marthandam (K.K District) <br>
-                        Tamil Nadu, IND <br>
-                        Phone: +91 9159669599 <br>
-                        Email: <a href="mailto:info@anybiz.com" class="">info@bluedart.in</a><br>
-                        Web: <a href="smart-eye.html" class="">www.bluedart.in</a>
-                    </address>
 
-                </div>
-            </div>
-        </div>
-        
-
-    </footer>
     <div class="copy">
-            <div class="container">
-                <a href="https://www.smarteyeapps.com/">2015 &copy; All Rights Reserved | Designed and Developed by Smarteyeapps</a>
+    <div class="container center">
+              
                 
-                <span>
-                <a href=""><i class="fab fa-github"></i></a>
-                <a href="https://www.linkedin.com/groups/10411920/"><i class="fab fa-linkedin-in"></i></a>
-                <a href="https://in.pinterest.com/prabnr/pins/"><i class="fab fa-pinterest-p"></i></a>
-                <a href="https://twitter.com/prabinraja89"><i class="fab fa-twitter"></i></a>
-                <a href="https://www.facebook.com/freewebtemplatesbysmarteye"><i class="fab fa-facebook-f"></i></a>
-        </span>
-            </div>
+                
+              <a href="https://github.com/yudokusora/Cinetics"><i class="fab fa-github"></i></a>
+              <a href="#"><i class="fab fa-linkedin-in"></i></a>
+              <a href="#"><i class="fab fa-pinterest-p"></i></a>
+              <a href="#"><i class="fab fa-twitter"></i></a>
+              <a href="#"><i class="fab fa-facebook-f"></i></a>
+     
+          </div>
 
         </div>
 </body>

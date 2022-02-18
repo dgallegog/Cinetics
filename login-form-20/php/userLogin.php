@@ -7,7 +7,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     {
         if(loginOK(filter_input(INPUT_POST,'user'),filter_input(INPUT_POST,'password')))
         {
-            logLogin(filter_input(INPUT_POST,'user'),true);
+            generateLog(filter_input(INPUT_POST,'user'),0);
             updateLastSignIn(filter_input(INPUT_POST,'user'));
             session_start();
             $_SESSION["user"] = $_POST['user'];
@@ -15,7 +15,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             exit;
         }
         else {
-            logLogin(filter_input(INPUT_POST,'user'),false);
+            generateLog(filter_input(INPUT_POST,'user'),1);
         }
     }    
 }

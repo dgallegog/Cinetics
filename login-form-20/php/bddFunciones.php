@@ -2,10 +2,10 @@
 
 
 function connectaDB(){
-    $cadenaConnexio = 'mysql:dbname=cinetics;host=localhost:3307'; // Conexion Gerard
+    //$cadenaConnexio = 'mysql:dbname=cinetics;host=localhost:3307'; // Conexion Gerard
     $usuari = 'root';
     $passwd = '';
-    //$cadenaConnexio = 'mysql:dbname=cinetics;host=localhost'; //Conexion Gallego
+    $cadenaConnexio = 'mysql:dbname=cinetics;host=localhost'; //Conexion Gallego
     try{
         $db = new PDO($cadenaConnexio, $usuari, $passwd, 
                         array(PDO::ATTR_PERSISTENT => true));
@@ -72,6 +72,26 @@ function registerOk ($user,$pwd,$firstname,$lastname,$email,$activationCode)
         return $insert;
   
 }
+function getIdUser($username){
+    $db=connectaDB();
+    $sql = "SELECT `iduser` FROM `users` WHERE `username`=:user";  
+    $select=$db->prepare($sql);
+    $select->execute(array(':user'=>$username));
+    return $select;    
+}
+
+function insertarVideo($username,$path,$description)
+{
+    $user = getIduser($username);
+    $db=connectaDB();
+    $sql = "INSERT INTO `iduser` FROM `videos`(`path`,`description`,`usersIduser`)VALUES(:pathU,:descriptionU,:usersIduser)";  
+    $insert=$db->prepare($sql);
+    $insert->execute(array(':pathU'=>$path,':descriptionU'=>$description,':usersIduser'=>$user));
+    return $insert;
+}
+
+
+
 function updateLastSignIn ($user)
 {
     $db=connectaDB();   

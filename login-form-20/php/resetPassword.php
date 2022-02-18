@@ -11,7 +11,7 @@ require_once('errorControl.php');
         $error=resetPassPost($resetCode,$password);
         if ($error==90)
         {
-            logResetOK($mail);
+            generateLog($mail,7);
             header('Location: ../index.php?error='.$error);
         }
         else {

@@ -23,8 +23,8 @@ CREATE TABLE IF NOT EXISTS `users`(
 
 CREATE TABLE IF NOT EXISTS `videos`(
     `idVideo` INT AUTO_INCREMENT NOT NULL,
-    `likes` INT UNSIGNED,
-    `dislikes` INT UNSIGNED,
+    `likes` INT UNSIGNED DEFAULT 0,
+    `dislikes` INT UNSIGNED DEFAULT 0,
     `path` VARCHAR(300) NOT NULL,
     `description` VARCHAR(300) NOT NULL,
     `uploadDate` DATETIME DEFAULT NOW(),

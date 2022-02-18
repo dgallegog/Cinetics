@@ -1,68 +1,16 @@
 <?php
-function logLogin($user,$ok) {
-    $log_filename = "../logs/login/KO";
-    if ($ok) $log_filename = "../logs/login/OK";
-    $log_msg="[".date('H:i:s')."] Usuario: ".$user;
-    if (!file_exists($log_filename))
-    {
-        mkdir($log_filename, 0777, true);
+function generateLog($userOrmail,$code){
+    switch($code){
+        case 0: {$log_filename = "../logs/login/OK"; break;}
+        case 1: {$log_filename = "../logs/login/KO"; break;}
+        case 2: {$log_filename = "../logs/logout"; break;}
+        case 3: {$log_filename = "../logs/signUp"; break;}
+        case 4: {$log_filename = "../logs/activation/send"; break;}
+        case 5: {$log_filename = "../logs/activation/OK"; break;}
+        case 6: {$log_filename = "../logs/pwdReset/send"; break;}
+        case 7: {$log_filename = "../logs/pwdReset/OK"; break;}
     }
-    $log_file_data = $log_filename.'/log_' . date('d-M-Y') . '.log';
-    file_put_contents($log_file_data, $log_msg . "\n", FILE_APPEND);
-}
-function logLogout($user) {
-    $log_filename = "../logs/logout";
-    $log_msg="[".date('H:i:s')."] Usuario: ".$user;
-    if (!file_exists($log_filename))
-    {
-        mkdir($log_filename, 0777, true);
-    }
-    $log_file_data = $log_filename.'/log_' . date('d-M-Y') . '.log';
-    file_put_contents($log_file_data, $log_msg . "\n", FILE_APPEND);
-}
-function logSignUp($user) {
-    $log_filename = "../logs/signUp";
-    $log_msg="[".date('H:i:s')."] Usuario: ".$user;
-    if (!file_exists($log_filename))
-    {
-        mkdir($log_filename, 0777, true);
-    }
-    $log_file_data = $log_filename.'/log_' . date('d-M-Y') . '.log';
-    file_put_contents($log_file_data, $log_msg . "\n", FILE_APPEND);
-}
-function logActivationSend($email,$string) {
-    $log_filename = "../logs/activation/send";
-    $log_msg="[".date('H:i:s')."] Email: ".$email;
-    if (!file_exists($log_filename))
-    {
-        mkdir($log_filename, 0777, true);
-    }
-    $log_file_data = $log_filename.'/log_' . date('d-M-Y') . '.log';
-    file_put_contents($log_file_data, $log_msg . "\n", FILE_APPEND);
-}
-function logActivationOK($email) {
-    $log_filename = "../logs/activation/OK";
-    $log_msg="[".date('H:i:s')."] Email: ".$email;
-    if (!file_exists($log_filename))
-    {
-        mkdir($log_filename, 0777, true);
-    }
-    $log_file_data = $log_filename.'/log_' . date('d-M-Y') . '.log';
-    file_put_contents($log_file_data, $log_msg . "\n", FILE_APPEND);
-}
-function logResetSend($email) {
-    $log_filename = "../logs/pwdReset/send";
-    $log_msg="[".date('H:i:s')."] Email: ".$email;
-    if (!file_exists($log_filename))
-    {
-        mkdir($log_filename, 0777, true);
-    }
-    $log_file_data = $log_filename.'/log_' . date('d-M-Y') . '.log';
-    file_put_contents($log_file_data, $log_msg . "\n", FILE_APPEND);
-}
-function logResetOK($email) {
-    $log_filename = "../logs/pwdReset/OK";
-    $log_msg="[".date('H:i:s')."] Email: ".$email;
+    $log_msg="[".date('H:i:s')."] Usuario/Mail: ".$userOrmail;
     if (!file_exists($log_filename))
     {
         mkdir($log_filename, 0777, true);
@@ -72,4 +20,19 @@ function logResetOK($email) {
 }
 
 
+function generateVideoLog($userOrmail,$code, $mensaje)
+{
+    switch($code){
+        case 0: {$log_filename = "../logs/video/success"; break;}
+        case 1: {$log_filename = "../logs/video/error"; break;}
+    }
+
+    $log_msg="[".date('H:i:s')."] Usuario/Mail: ".$userOrmail." (".$mensaje.")";
+    if (!file_exists($log_filename))
+    {
+        mkdir($log_filename, 0777, true);
+    }
+    $log_file_data = $log_filename.'/log_' . date('d-M-Y') . '.log';
+    file_put_contents($log_file_data, $log_msg . "\n", FILE_APPEND);
+}
 ?>

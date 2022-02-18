@@ -7,7 +7,33 @@
  *
  * Copyright (c) 2018 Daniel Eden
  */
+ .like,
+ .dislike {
+     display: inline-block;
+     margin-bottom: 0;
+     font-weight: normal;
+     text-align: center;
+     vertical-align: middle;
+     cursor: pointer;
+     background: rgb(144, 182, 238);
+     border: 1px solid transparent;
+     white-space: nowrap;
+     padding: 6px 12px;
+     font-size: 14px;
+     line-height: 1.428571429;
+     border-radius: 4px;
+ }
+ .qty1,
+ .qty2 {
+     border: none;
+     width:20px;
+     background: transparent;
+ }
 
+ .uploadVideo:hover{
+   
+  background-color: green;
+ }
 @-webkit-keyframes bounce {
   from,
   20%,

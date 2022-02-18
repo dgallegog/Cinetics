@@ -5,7 +5,7 @@
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
 
-:root {
+ :root {
     --blue: #007bff;
     --indigo: #6610f2;
     --purple: #6f42c1;
@@ -8715,6 +8715,10 @@ button.bg-dark:focus {
     width: 100% !important;
 }
 
+.w-100:hover {
+    color: red;
+}
+
 .w-auto {
     width: auto !important;
 }
@@ -10926,7 +10930,7 @@ body:after {
     bottom: 0;
     content: '';
     background: #000;
-    opacity: .3;
+    opacity: .2;
     z-index: -1;
 }
 
@@ -10980,6 +10984,9 @@ h5,
 .heading-section {
     font-size: 28px;
     color: #fff;
+    background: darkred;
+    border: 1px solid #ffffff !important;
+    border-radius: 40px;
 }
 
 .img {
@@ -10996,6 +11003,9 @@ h5,
 .login-wrap h3 {
     font-weight: 300;
     color: #fff;
+    background: darkred;
+    border: 1px solid #ffffff !important;
+    border-radius: 40px;
 }
 
 .login-wrap .social {
@@ -11036,7 +11046,7 @@ h5,
     height: 50px;
     color: white !important;
     border: 1px solid transparent;
-    background: rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.4);
     border-radius: 40px;
     padding-left: 20px;
     padding-right: 20px;
@@ -11124,6 +11134,10 @@ textarea.form-control {
     left: 0;
 }
 
+.checkmark:hover {
+    color: red
+}
+
 
 /* Create the checkmark/indicator (hidden when not checked) */
 
@@ -11161,11 +11175,15 @@ textarea.form-control {
 /* Style the checkmark/indicator */
 
 .checkbox-primary {
-    color: #fbceb5;
+    color: white;
+}
+
+.checkbox-primary:hover {
+    color: red;
 }
 
 .checkbox-primary input:checked~.checkmark:after {
-    color: #fbceb5;
+    color: white;
 }
 
 .btn {
@@ -11181,18 +11199,19 @@ textarea.form-control {
 .btn:active,
 .btn:focus {
     outline: none;
+    color: red;
 }
 
 .btn.btn-primary {
-    background: #fbceb5 !important;
-    border: 1px solid #fbceb5 !important;
-    color: #000 !important;
+    background: darkred !important;
+    border: 1px solid white !important;
+    color: white !important;
 }
 
 .btn.btn-primary:hover {
     border: 1px solid #fbceb5;
     background: transparent;
-    color: #fbceb5;
+    color: red;
 }
 
 .btn.btn-primary.btn-outline-primary {
@@ -11234,17 +11253,4 @@ textarea.form-control {
     border: none;
     outline: none;
     cursor: pointer;
-}
-
-background: #03549a;
-border-radius: 100%;
-width: 40px;
-height: 40px;
-border: none;
-outline: none;
-cursor: pointer;
-
-}
-cursor: pointer;
-
 }
