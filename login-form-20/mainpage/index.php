@@ -15,25 +15,33 @@ if(isset($_GET['path']))
 {
     $video = obtenirVideoAleatori();
 }
+$i = 0;
+$miniaturaVid = miniatura($video,$i);
+$i++;
+function miniatura($video,$i)
+{
+    $sec = 10;
+    $movie = $video;
+    $thumbnail = 'thumbnail'.$i.".png";
+    
+    $ffmpeg = FFMpeg\FFMpeg::create(array(
+        'ffmpeg.binaries' => 'C:\Users\david\Downloads\ffmpeg-master-latest-win64-gpl\bin\ffmpeg.exe',
+        'ffprobe.binaries' => 'C:\Users\david\Downloads\ffmpeg-master-latest-win64-gpl\bin\ffprobe.exe',
+        'timeout' => 3600, // The timeout for the underlying process
+        'ffmpeg.threads' => 12, // The number of threads that FFMpeg should use
+        ));
+    
+    $video = $ffmpeg->open($movie);
+    $frame = $video->frame(FFMpeg\Coordinate\TimeCode::fromSeconds($sec));
+    $frame->save($thumbnail);
 
+    return $thumbnail;  
+}
 
 // TODO hacer un count a la tabla videos para ver cuantos videos tenemos en la BDD. En funcion de eso hacer un
 // TODO switch que dinamicamente muestre más o menos miniaturas. Ejemplo: 0 videos, no se muestra. 1-5 videos, se muestran 2 miniaturas. >5 videos. se muestran 5 miniaturas.
 // TODO colocar todo lo de abajo en una funcion
-$sec = 10;
-$movie = $video;
-$thumbnail = 'thumbnail.png';
 
-$ffmpeg = FFMpeg\FFMpeg::create(array(
-    'ffmpeg.binaries' => 'C:\Users\david\Downloads\ffmpeg-master-latest-win64-gpl\bin\ffmpeg.exe',
-    'ffprobe.binaries' => 'C:\Users\david\Downloads\ffmpeg-master-latest-win64-gpl\bin\ffprobe.exe',
-    'timeout' => 3600, // The timeout for the underlying process
-    'ffmpeg.threads' => 12, // The number of threads that FFMpeg should use
-    ));
-
-$video = $ffmpeg->open($movie);
-$frame = $video->frame(FFMpeg\Coordinate\TimeCode::fromSeconds($sec));
-$frame->save($thumbnail);
 
 ?>
 
@@ -149,7 +157,7 @@ $frame->save($thumbnail);
                             <div class="carousel-inner">
                                 <div class="carousel-item active ">
                                     <a href="single.php">
-                                        <img src="<?php echo $thumbnail ?>" class="d-block w-100" alt="...">
+                                        <img src="<?php echo $miniaturaVid ?>" class="d-block w-100" alt="...">
                                         <div class="detail-card">
                                             <p>Pictures, abstract symbols the ingredients with symbols the
                                             </p>
@@ -158,7 +166,7 @@ $frame->save($thumbnail);
                                 </div>
                                 <div class="carousel-item">
                                     <a href="single.php">
-                                        <img src="assets/images/video/banner_2.jpg" class="d-block w-100" alt="...">
+                                        <img src="<?php echo miniatura(obtenirVideoAleatori(),$i); $i++; ?>" class="d-block w-100" alt="...">
                                         <div class="detail-card">
                                             <p>Pictures, abstract symbols the ingredients with symbols the
                                             </p>
@@ -167,7 +175,7 @@ $frame->save($thumbnail);
                                 </div>
                                 <div class="carousel-item">
                                     <a href="single.php">
-                                        <img src="assets/images/video/banner_3.jpg" class="d-block w-100" alt="...">
+                                        <img src="<?php echo miniatura(obtenirVideoAleatori(),$i); $i++ ?>" class="d-block w-100" alt="...">
                                         <div class="detail-card">
                                             <p>Pictures, abstract symbols the ingredients with symbols the
                                             </p>
