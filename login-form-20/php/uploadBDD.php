@@ -1,6 +1,6 @@
 <?php
 require_once('logsManager.php');
-require_once('bddFunciones.php');
+require_once('videoManager.php');
 
 
 function montarHastags($hashtag)

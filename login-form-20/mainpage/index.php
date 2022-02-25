@@ -1,5 +1,5 @@
 <?php 
-require_once("../php/bddFunciones.php");
+require_once("../php/videoManager.php");
 require '../vendor/autoload.php';
 
 session_start();
@@ -9,15 +9,17 @@ if(!isset($_SESSION["user"]))header('Location: ../index.php');
 if(isset($_GET['path']))
 {
     $video = $_GET['path'];
-    //echo "<script type=\"text/javascript\">window.history.pushState('index', 'Title', '/Cinetics-master/login-form-20/index.php');</script>";
+    // Echo inferior para limpiar la barra del navegador del string que llega por path.
+    echo "<script type=\"text/javascript\">window.history.pushState('index', 'Title', '/Cinetics-master/login-form-20/mainpage/index.php');</script>";
 }else
 {
     $video = obtenirVideoAleatori();
 }
 
 
-
-
+// TODO hacer un count a la tabla videos para ver cuantos videos tenemos en la BDD. En funcion de eso hacer un
+// TODO switch que dinamicamente muestre más o menos miniaturas. Ejemplo: 0 videos, no se muestra. 1-5 videos, se muestran 2 miniaturas. >5 videos. se muestran 5 miniaturas.
+// TODO colocar todo lo de abajo en una funcion
 $sec = 10;
 $movie = $video;
 $thumbnail = 'thumbnail.png';
