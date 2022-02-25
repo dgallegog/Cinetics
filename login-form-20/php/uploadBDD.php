@@ -32,14 +32,12 @@ if (($_FILES["file"]["type"] == "video/mp4")
       }
     else
       {
+        //TODO crear funcion para crear el nombre del archivo $_FILES["file"]["tmp_name"]=funcionNombre(); tiene que dar user+fecha.
       move_uploaded_file($_FILES["file"]["tmp_name"],
       "../upload/" . $_FILES["file"]["name"]);
       $infoCode= "Stored in: " . "../upload/" . $_FILES["file"]["name"];
       }
-    }
-
-
-    
+    } 
   }
 else
   {
