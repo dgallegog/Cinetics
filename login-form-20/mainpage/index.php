@@ -18,29 +18,10 @@ if(isset($_GET['path']))
 $i = 0;
 $miniaturaVid = miniatura($video,$i);
 $i++;
-function miniatura($video,$i)
-{
-    $sec = 10;
-    $movie = $video;
-    $thumbnail = 'thumbnail'.$i.".png";
-    
-    $ffmpeg = FFMpeg\FFMpeg::create(array(
-        'ffmpeg.binaries' => 'C:\Users\david\Downloads\ffmpeg-master-latest-win64-gpl\bin\ffmpeg.exe',
-        'ffprobe.binaries' => 'C:\Users\david\Downloads\ffmpeg-master-latest-win64-gpl\bin\ffprobe.exe',
-        'timeout' => 3600, // The timeout for the underlying process
-        'ffmpeg.threads' => 12, // The number of threads that FFMpeg should use
-        ));
-    
-    $video = $ffmpeg->open($movie);
-    $frame = $video->frame(FFMpeg\Coordinate\TimeCode::fromSeconds($sec));
-    $frame->save($thumbnail);
-
-    return $thumbnail;  
-}
 
 // TODO hacer un count a la tabla videos para ver cuantos videos tenemos en la BDD. En funcion de eso hacer un
 // TODO switch que dinamicamente muestre más o menos miniaturas. Ejemplo: 0 videos, no se muestra. 1-5 videos, se muestran 2 miniaturas. >5 videos. se muestran 5 miniaturas.
-// TODO colocar todo lo de abajo en una funcion
+
 
 
 ?>

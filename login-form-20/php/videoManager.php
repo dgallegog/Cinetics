@@ -71,4 +71,23 @@ function obtenirVideoAleatori()
     return $datos[0]['path'];
 
 }
+function miniatura($video,$i)
+{
+    $sec = 10;
+    $movie = $video;
+    $thumbnail = 'thumbnail'.$i.".png";
+    
+    $ffmpeg = FFMpeg\FFMpeg::create(array(
+        'ffmpeg.binaries' => 'C:\Users\david\Downloads\ffmpeg-master-latest-win64-gpl\bin\ffmpeg.exe',
+        'ffprobe.binaries' => 'C:\Users\david\Downloads\ffmpeg-master-latest-win64-gpl\bin\ffprobe.exe',
+        'timeout' => 3600, // The timeout for the underlying process
+        'ffmpeg.threads' => 12, // The number of threads that FFMpeg should use
+        ));
+    
+    $video = $ffmpeg->open($movie);
+    $frame = $video->frame(FFMpeg\Coordinate\TimeCode::fromSeconds($sec));
+    $frame->save($thumbnail);
+
+    return $thumbnail;  
+}
 ?>
