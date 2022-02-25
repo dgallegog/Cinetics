@@ -3,14 +3,7 @@ require_once('logsManager.php');
 require_once('videoManager.php');
 
 
-function montarHastags($hashtag)
-{
 
-  $hashtagArray = explode("#",trim($hashtag));
-  array_shift($hashtagArray);  
-  return $hashtagArray;
-
-}
 session_start();
 $allowedExts = array("mp4");
 $extension = pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION);
@@ -46,7 +39,6 @@ if (($_FILES["file"]["type"] == "video/mp4")
       
       $description=$_POST["description"];
       insertarVideo($_SESSION["user"],$path,$description,$hashtags);
-      header('Location','../mainpage/index.php?path='.$path);
       }
     } 
   }
@@ -56,6 +48,14 @@ else
   $errorCode=1;
   }
   generateVideoLog($_SESSION["user"],$errorCode,$infoCode);
+  if ($errorCode==0){
+    header('Location: ../mainpage/index.php?path='.$path);
+    exit;
+  }
+  else {
+    header('Location: ../mainpage/index.php');
+    exit;
+  }
 
 
 ?>

@@ -2,10 +2,11 @@
 
 
 function connectaDB(){
-    //$cadenaConnexio = 'mysql:dbname=cinetics;host=localhost:3307'; // Conexion Gerard
+    $cadenaConnexio = 'mysql:dbname=cinetics;host=localhost:3307'; // Conexion Gerard
     $usuari = 'root';
-    $passwd = '1234';
-    $cadenaConnexio = 'mysql:dbname=cinetics;host=localhost'; //Conexion Gallego
+    //$passwd = '1234'; //Gallego
+    $passwd = '';//Gerard
+    //$cadenaConnexio = 'mysql:dbname=cinetics;host=localhost'; //Conexion Gallego
     try{
         $db = new PDO($cadenaConnexio, $usuari, $passwd, 
                         array(PDO::ATTR_PERSISTENT => true));

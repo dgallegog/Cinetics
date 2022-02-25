@@ -1,5 +1,6 @@
 <?php
 require_once('bddFunciones.php');
+require '../vendor/autoload.php';
 
 function insertarVideo($username,$path,$description,$hashtags)
 {
@@ -68,6 +69,10 @@ function obtenirVideoAleatori()
     $video = $db->prepare($sql);
     $video->execute(array());
     $datos = $video->fetchAll();
+    if (count($datos)==0)
+    {
+        return 0;
+    }
     return $datos[0]['path'];
 
 }
@@ -78,8 +83,10 @@ function miniatura($video,$i)
     $thumbnail = 'thumbnail'.$i.".png";
     
     $ffmpeg = FFMpeg\FFMpeg::create(array(
-        'ffmpeg.binaries' => 'C:\Users\david\Downloads\ffmpeg-master-latest-win64-gpl\bin\ffmpeg.exe',
-        'ffprobe.binaries' => 'C:\Users\david\Downloads\ffmpeg-master-latest-win64-gpl\bin\ffprobe.exe',
+        //'ffmpeg.binaries' => 'C:\Users\david\Downloads\ffmpeg-master-latest-win64-gpl\bin\ffmpeg.exe', //Gallego
+        //'ffprobe.binaries' => 'C:\Users\david\Downloads\ffmpeg-master-latest-win64-gpl\bin\ffprobe.exe', //Gallego
+        'ffmpeg.binaries' => 'C:\Users\Gerard\Downloads\ffmpeg-master-latest-win64-gpl\bin\ffmpeg.exe',//Gerard
+        'ffprobe.binaries' => 'C:\Users\Gerard\Downloads\ffmpeg-master-latest-win64-gpl\bin\ffprobe.exe',//Gerard
         'timeout' => 3600, // The timeout for the underlying process
         'ffmpeg.threads' => 12, // The number of threads that FFMpeg should use
         ));
@@ -89,5 +96,24 @@ function miniatura($video,$i)
     $frame->save($thumbnail);
 
     return $thumbnail;  
+}
+function montarHastags($hashtag)
+{
+
+  $hashtagArray = explode("#",trim($hashtag));
+  array_shift($hashtagArray);  
+  return $hashtagArray;
+
+}
+function obtenirVideosAleatoris()
+{
+    $arrayVideos = [];
+    $db = connectaDB();
+    $sql = 'SELECT `path` FROM `videos` ORDER BY RAND() LIMIT 5';
+    $videos = $db->prepare($sql);
+    $videos->execute(array());
+    $datos = $videos->fetchAll();
+    foreach($datos as $video) array_push($arrayVideos,$video['path']);
+    return $arrayVideos;
 }
 ?>

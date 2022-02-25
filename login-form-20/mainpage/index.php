@@ -1,6 +1,6 @@
 <?php 
 require_once("../php/videoManager.php");
-require '../vendor/autoload.php';
+
 
 session_start();
    
@@ -15,13 +15,15 @@ if(isset($_GET['path']))
 {
     $video = obtenirVideoAleatori();
 }
-$i = 0;
-$miniaturaVid = miniatura($video,$i);
-$i++;
-
-// TODO hacer un count a la tabla videos para ver cuantos videos tenemos en la BDD. En funcion de eso hacer un
-// TODO switch que dinamicamente muestre más o menos miniaturas. Ejemplo: 0 videos, no se muestra. 1-5 videos, se muestran 2 miniaturas. >5 videos. se muestran 5 miniaturas.
-
+if ($video!=0){
+    // Aqui estoy filtrando para cuando no hay videos en la bdd. actualmente el html se fastidia ya que depende de miniaturaVid.
+    $i = 0;
+    $miniaturaVid = miniatura($video,$i);
+    $i++;
+}
+$videosCarrusel=obtenirVideosAleatoris();
+//TODO en $videosCarrusel habrá un array con Paths (0 min, 5 max). Falta crear dinamicamente el html
+//TODO para mostrar en función de la variable las miniaturas.
 
 
 ?>
