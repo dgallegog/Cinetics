@@ -1,5 +1,16 @@
 <?php
 require_once('logsManager.php');
+require_once('bddFunciones.php');
+
+
+function montarHastags($hashtag)
+{
+
+  $hashtagArray = explode("#",trim($hashtag));
+  array_shift($hashtagArray);  
+  return $hashtagArray;
+
+}
 session_start();
 $allowedExts = array("mp4");
 $extension = pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION);
@@ -17,25 +28,25 @@ if (($_FILES["file"]["type"] == "video/mp4")
     }
   else
     {
-    echo "Upload: " . $_FILES["file"]["name"] . "<br />";
-    echo "Type: " . $_FILES["file"]["type"] . "<br />";
-    echo "Size: " . ($_FILES["file"]["size"] / 1024) . " Kb<br />";
-    echo "Temp file: " . $_FILES["file"]["tmp_name"] . "<br />";
-    //TODO asignar al video un path basado en user+fecha
-    //TODO subir a la bdd titulo,hashtags,descripcion, path.
-    //TODO al hacer el insert de lo de arriba nos dará una id de video. utilizemos esa id para guardar el video
 
     if (file_exists("../upload/" . $_FILES["file"]["name"]))
       {
+        
         $infoCode= $_FILES["file"]["name"] . " already exists. ";
         $errorCode=1;
       }
     else
       {
-        //TODO crear funcion para crear el nombre del archivo $_FILES["file"]["tmp_name"]=funcionNombre(); tiene que dar user+fecha.
+        $hashtags = montarHastags($_POST["Hashtags"]);
+        $nombreArchivo = generarNombre($_SESSION["user"]);
       move_uploaded_file($_FILES["file"]["tmp_name"],
-      "../upload/" . $_FILES["file"]["name"]);
-      $infoCode= "Stored in: " . "../upload/" . $_FILES["file"]["name"];
+      "../upload/" . $nombreArchivo);
+      $path="../upload/".$nombreArchivo;
+      $infoCode= "Stored in: " . $path;
+      
+      $description=$_POST["description"];
+      insertarVideo($_SESSION["user"],$path,$description,$hashtags);
+      header('Location','../mainpage/index.php?path='.$path);
       }
     } 
   }
@@ -45,4 +56,6 @@ else
   $errorCode=1;
   }
   generateVideoLog($_SESSION["user"],$errorCode,$infoCode);
+
+
 ?>

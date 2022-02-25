@@ -3,6 +3,12 @@
     session_start();
 
     if(!isset($_SESSION["user"]))header('Location: ../index.php'); 
+    else if(!isset($_GET['path']))header('Location: ./index.php'); 
+    else
+    {
+        $video = $_GET['path'];
+    }
+
 ?>
 
 <!doctype html>
@@ -115,8 +121,10 @@
                 <div class="row">
                     <div class="col-md-8">
                         <div class="row no-margin video-cover">
-                            <iframe  height="415" src="https://www.youtube.com/embed/bveuj63Su4E" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                                <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+                        <video width="615"  controls>
+                            <source src="<?php echo $video ?>" type="video/mp4">
+                            
+                            </video>
                             <p></p><div class="container"> 
                                 <a class="like"><i class="fa fa-thumbs-up"></i>  
                                     Like <input class="qty1" name="qty1" readonly="readonly" type="text" value="0" />

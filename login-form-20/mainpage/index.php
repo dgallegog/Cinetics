@@ -1,9 +1,37 @@
 <?php 
-
+require_once("../php/bddFunciones.php");
+require '../vendor/autoload.php';
 
 session_start();
-    
+   
 if(!isset($_SESSION["user"]))header('Location: ../index.php'); 
+
+if(isset($_GET['path']))
+{
+    $video = $_GET['path'];
+    //echo "<script type=\"text/javascript\">window.history.pushState('index', 'Title', '/Cinetics-master/login-form-20/index.php');</script>";
+}else
+{
+    $video = obtenirVideoAleatori();
+}
+
+
+
+
+$sec = 10;
+$movie = $video;
+$thumbnail = 'thumbnail.png';
+
+$ffmpeg = FFMpeg\FFMpeg::create(array(
+    'ffmpeg.binaries' => 'C:\Users\david\Downloads\ffmpeg-master-latest-win64-gpl\bin\ffmpeg.exe',
+    'ffprobe.binaries' => 'C:\Users\david\Downloads\ffmpeg-master-latest-win64-gpl\bin\ffprobe.exe',
+    'timeout' => 3600, // The timeout for the underlying process
+    'ffmpeg.threads' => 12, // The number of threads that FFMpeg should use
+    ));
+
+$video = $ffmpeg->open($movie);
+$frame = $video->frame(FFMpeg\Coordinate\TimeCode::fromSeconds($sec));
+$frame->save($thumbnail);
 
 ?>
 
@@ -117,9 +145,9 @@ if(!isset($_SESSION["user"]))header('Location: ../index.php');
                                 <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
                             </ol>
                             <div class="carousel-inner">
-                                <div class="carousel-item active">
+                                <div class="carousel-item active ">
                                     <a href="single.php">
-                                        <img src="assets/images/video/banner.jpg" class="d-block w-100" alt="...">
+                                        <img src="<?php echo $thumbnail ?>" class="d-block w-100" alt="...">
                                         <div class="detail-card">
                                             <p>Pictures, abstract symbols the ingredients with symbols the
                                             </p>

@@ -2,22 +2,27 @@
 require_once('bddFunciones.php'); 
 require_once('logsManager.php');
 require_once('errorControl.php');
-   // TODO no estamos verificando que los dos passwords coincidan!!
     if($_SERVER["REQUEST_METHOD"] == "POST")
     {
         $mail = filter_input(INPUT_POST,'mail');
         $resetCode = filter_input(INPUT_POST,'passcode');
         $password = filter_input(INPUT_POST,'password');
-        $error=resetPassPost($resetCode,$password);
-        if ($error==90)
-        {
-            generateLog($mail,7);
-            header('Location: ../index.php?error='.$error);
+        $verifypswd = filter_input(INPUT_POST,'verifypswd');
+        if ($password==$verifypswd)
+        {   
+            $error=resetPassPost($resetCode,$password);
+            if ($error==90)
+            {
+                generateLog($mail,7);
+                header('Location: ../index.php?error='.$error);
+            }
+            else {
+                echo controlError(4);
+            }   
         }
         else {
-            echo controlError(4);
-        }   
-        
+            echo controlError(7);
+        }      
 
     }else if($_SERVER["REQUEST_METHOD"] == "GET"){
 

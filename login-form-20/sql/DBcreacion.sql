@@ -37,7 +37,7 @@ CREATE TABLE IF NOT EXISTS `videos`(
 
 CREATE TABLE IF NOT EXISTS `hashtags`(
     `idHashtag` INT AUTO_INCREMENT NOT NULL,
-    `tag` VARCHAR(30),
+    `tag` VARCHAR(30) UNIQUE NOT NULL,
     PRIMARY KEY(`idHashtag`)
 );
 

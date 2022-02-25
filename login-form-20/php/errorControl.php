@@ -28,6 +28,7 @@ function controlError($err){
         case 4: $string=$string.'El password no mide 8 caracteres.';break;
         case 5: $string=$string.'Login incorrecto.';break;
         case 6: $string=$string.'Ese usuario y/o mail no existe/n.';break;
+        case 7: $string=$string. 'Las contraseñas deben coincidir';break;
         case 50: $string=$string.'Usuario verificado correctamente. Cuenta activada.';break;
         case 90: $string=$string.'Contraseña reseteada. Ya puedes loguear con tu nueva contraseña.';break;
         case 91: $string=$string.'Te hemos mandado un mail para resetear tu contraseña.';break;
