@@ -2,6 +2,7 @@
 require_once('bddFunciones.php'); 
 require_once('logsManager.php');
 require_once('errorControl.php');
+require_once('sendMail.php');
     if($_SERVER["REQUEST_METHOD"] == "POST")
     {
         $mail = filter_input(INPUT_POST,'mail');
@@ -14,6 +15,7 @@ require_once('errorControl.php');
             if ($error==90)
             {
                 generateLog($mail,7);
+                sendMail($mail,'Contraseña reseteada correctamente','<h1>Saludos. Le informamos de que su contraseña ha sido reseteada con éxito.</h1> '); 
                 header('Location: ../index.php?error='.$error);
             }
             else {

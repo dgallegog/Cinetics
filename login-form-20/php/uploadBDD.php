@@ -33,12 +33,13 @@ if (($_FILES["file"]["type"] == "video/mp4")
         $hashtags = montarHastags($_POST["Hashtags"]);
         $nombreArchivo = generarNombre($_SESSION["user"]);
       move_uploaded_file($_FILES["file"]["tmp_name"],
-      "../upload/" . $nombreArchivo);
+      "../upload/" . $nombreArchivo.".mp4");
       $path="../upload/".$nombreArchivo;
-      $infoCode= "Stored in: " . $path;
+      $infoCode= "Stored in: " . $path.".mp4";
       
+      miniatura($path);
       $description=$_POST["description"];
-      insertarVideo($_SESSION["user"],$path,$description,$hashtags);
+      insertarVideo($_SESSION["user"],$path.".mp4",$description,$hashtags);
       }
     } 
   }

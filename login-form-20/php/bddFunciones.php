@@ -2,11 +2,12 @@
 
 
 function connectaDB(){
-    $cadenaConnexio = 'mysql:dbname=cinetics;host=localhost:3307'; // Conexion Gerard
+    //$cadenaConnexio = 'mysql:dbname=cinetics;host=localhost:3307'; // Conexion Gerard
+    $cadenaConnexio = 'mysql:dbname=cinetics;host=localhost'; //Conexion Gallego
     $usuari = 'root';
-    //$passwd = '1234'; //Gallego
-    $passwd = '';//Gerard
-    //$cadenaConnexio = 'mysql:dbname=cinetics;host=localhost'; //Conexion Gallego
+    $passwd = '1234'; //Gallego
+    //$passwd = '';//Gerard
+   
     try{
         $db = new PDO($cadenaConnexio, $usuari, $passwd, 
                         array(PDO::ATTR_PERSISTENT => true));
@@ -125,8 +126,7 @@ function resetPassPost($resetPassCode,$password)
 }
 
 function resetPassGet($mail,$resetCode)
-{
-    
+{   
     $db = connectaDB();
     $sql = 'SELECT * FROM `users` WHERE `mail`=:mail AND `resetPassCode`=:resetCode';
     $codigoOK = $db->prepare($sql);
@@ -144,5 +144,21 @@ function resetPassGet($mail,$resetCode)
             $resetCode = 0;       
         }
         return $resetCode;
+}
+function obtenirReaccioVideo($username,$video)
+{
+
+}
+
+
+function encontrarVideoXpath($path)
+{
+    $db = connectaDB();
+    $sql = 'SELECT * FROM `videos` WHERE `path`=:patho';
+    $codigoOK = $db->prepare($sql);
+    $codigoOK->execute(array(':patho'=>$path));
+    $datos = $codigoOK->fetchAll();
+
+    return $datos;
 }
 ?>

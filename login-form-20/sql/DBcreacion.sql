@@ -23,8 +23,8 @@ CREATE TABLE IF NOT EXISTS `users`(
 
 CREATE TABLE IF NOT EXISTS `videos`(
     `idVideo` INT AUTO_INCREMENT NOT NULL,
-    `likes` INT UNSIGNED DEFAULT 0,
-    `dislikes` INT UNSIGNED DEFAULT 0,
+    --`likes` INT UNSIGNED DEFAULT 0, -- Con la nueva tabla videoReactions es redudante tener dos campos aqui para
+    --`dislikes` INT UNSIGNED DEFAULT 0, -- controlar likes y dislikes
     `path` VARCHAR(300) NOT NULL,
     `description` VARCHAR(300) NOT NULL,
     `uploadDate` DATETIME DEFAULT NOW(),
@@ -49,5 +49,17 @@ CREATE TABLE IF NOT EXISTS `videoHashtags`(
     CONSTRAINT `fk_videoHashtags_videos` FOREIGN KEY (`videosIdVideo`) REFERENCES `videos`(`idVideo`)
         ON UPDATE CASCADE ON DELETE CASCADE,
     CONSTRAINT `fk_videoHashtags_hashtags` FOREIGN KEY (`hashtagsIdHashtag`) REFERENCES `hashtags`(`idHashtag`)
+    ON UPDATE CASCADE ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS `videoReactions`(
+    `videosIdVideo` INT,
+    `usersIduser` INT,
+    `vote` BIT NOT NULL, -- 1: Like // 0: Dislike
+    PRIMARY KEY (`videosIdVideo`,`usersIduser`),
+
+    CONSTRAINT `fk_videoReactions_videos` FOREIGN KEY (`videosIdVideo`) REFERENCES `videos`(`idVideo`)
+        ON UPDATE CASCADE ON DELETE CASCADE,
+    CONSTRAINT `fk_videoReactions_users` FOREIGN KEY (`usersIduser`) REFERENCES `users`(`idUser`)
     ON UPDATE CASCADE ON DELETE CASCADE
 );

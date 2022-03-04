@@ -8,8 +8,8 @@
             "name": "Listen for Xdebug",
             "type": "php",
             "request": "launch",
-            "port": 9003 //Gerard
-            //"port": 9000 //Gallego
+            //"port": 9003 //Gerard
+            "port": 9000 //Gallego
         },
         {
             "name": "Launch currently open script",

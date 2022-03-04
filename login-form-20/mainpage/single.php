@@ -1,5 +1,6 @@
 <?php
 
+    require("../php/bddFunciones.php");
     session_start();
 
     if(!isset($_SESSION["user"]))header('Location: ../index.php'); 
@@ -7,8 +8,16 @@
     else
     {
         $video = $_GET['path'];
+        $video= str_replace("png", "mp4", $video);
     }
+    $datos = encontrarVideoXpath($video);
+    if(count($datos)<1)header('Location: ../index.php'); 
+    else{
 
+        $likes = $datos[0]['likes'];
+        $dislikes = $datos[0]['dislikes'];
+        $descripcion = $datos[0]['description'];
+    }
 ?>
 
 <!doctype html>
@@ -127,13 +136,13 @@
                             </video>
                             <p></p><div class="container"> 
                                 <a class="like"><i class="fa fa-thumbs-up"></i>  
-                                    Like <input class="qty1" name="qty1" readonly="readonly" type="text" value="0" />
+                                    Like <input class="qty1" name="qty1" readonly="readonly" type="text" value="<?php echo $likes ?>" />
                                 </a>
                                 <a class="dislike"><i class="fa fa-thumbs-down"></i> 
-                                    Dislike <input class="qty2"  name="qty2" readonly="readonly" type="text" value="0" />
+                                    Dislikes <input class="qty2"  name="qty2" readonly="readonly" type="text" value="<?php echo $dislikes ?>" />
                                 </a>
                             </div>
-                            <p>In this video, you will learn how to create a stylish appointment form from scratch using HTML, CSS, and Bootstrap Download the Project HTML, CSS, and Bootstrap Download the Project File from https://www.smarteyeapps.com/free-hos...
+                            <p><?php echo $descripcion ?>
                             </p>
 
                             <div class="row no-margin video-title" bis_skin_checked="1">

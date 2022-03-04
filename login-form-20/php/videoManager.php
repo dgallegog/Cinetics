@@ -59,7 +59,7 @@ function vincularVideoHashtags($idVideo,$idHashtags,$db)
 }
 function generarNombre($usuario)
 {
-    return $usuario.date("YmdHis").".mp4";
+    return $usuario.date("YmdHis");
 }
 
 function obtenirVideoAleatori() 
@@ -76,17 +76,17 @@ function obtenirVideoAleatori()
     return $datos[0]['path'];
 
 }
-function miniatura($video,$i)
+function miniatura($video)
 {
-    $sec = 10;
-    $movie = $video;
-    $thumbnail = 'thumbnail'.$i.".png";
+    $sec = 2;
+    $movie = $video.".mp4";
+    $thumbnail = $video.".png";
     
     $ffmpeg = FFMpeg\FFMpeg::create(array(
-        //'ffmpeg.binaries' => 'C:\Users\david\Downloads\ffmpeg-master-latest-win64-gpl\bin\ffmpeg.exe', //Gallego
-        //'ffprobe.binaries' => 'C:\Users\david\Downloads\ffmpeg-master-latest-win64-gpl\bin\ffprobe.exe', //Gallego
-        'ffmpeg.binaries' => 'C:\Users\Gerard\Downloads\ffmpeg-master-latest-win64-gpl\bin\ffmpeg.exe',//Gerard
-        'ffprobe.binaries' => 'C:\Users\Gerard\Downloads\ffmpeg-master-latest-win64-gpl\bin\ffprobe.exe',//Gerard
+        'ffmpeg.binaries' => 'C:\Users\david\Downloads\ffmpeg-master-latest-win64-gpl\bin\ffmpeg.exe', //Gallego
+        'ffprobe.binaries' => 'C:\Users\david\Downloads\ffmpeg-master-latest-win64-gpl\bin\ffprobe.exe', //Gallego
+        //'ffmpeg.binaries' => 'C:\Users\Gerard\Downloads\ffmpeg-master-latest-win64-gpl\bin\ffmpeg.exe',//Gerard
+        //'ffprobe.binaries' => 'C:\Users\Gerard\Downloads\ffmpeg-master-latest-win64-gpl\bin\ffprobe.exe',//Gerard
         'timeout' => 3600, // The timeout for the underlying process
         'ffmpeg.threads' => 12, // The number of threads that FFMpeg should use
         ));
@@ -94,6 +94,35 @@ function miniatura($video,$i)
     $video = $ffmpeg->open($movie);
     $frame = $video->frame(FFMpeg\Coordinate\TimeCode::fromSeconds($sec));
     $frame->save($thumbnail);
+
+    return $thumbnail;  
+}
+
+function miniaturas($video,$i)
+{
+    $sec = 10;
+    $movie = $video;
+    $thumbnail = array();
+    foreach($movie as $mov)
+    {
+        $frase = 'thumbnail'.$i.".png";
+        array_push($thumbnail,$frase);
+        
+        $ffmpeg = FFMpeg\FFMpeg::create(array(
+            'ffmpeg.binaries' => 'C:\Users\david\Downloads\ffmpeg-master-latest-win64-gpl\bin\ffmpeg.exe', //Gallego
+            'ffprobe.binaries' => 'C:\Users\david\Downloads\ffmpeg-master-latest-win64-gpl\bin\ffprobe.exe', //Gallego
+            //'ffmpeg.binaries' => 'C:\Users\Gerard\Downloads\ffmpeg-master-latest-win64-gpl\bin\ffmpeg.exe',//Gerard
+            //'ffprobe.binaries' => 'C:\Users\Gerard\Downloads\ffmpeg-master-latest-win64-gpl\bin\ffprobe.exe',//Gerard
+            'timeout' => 3600, // The timeout for the underlying process
+            'ffmpeg.threads' => 12, // The number of threads that FFMpeg should use
+            ));
+        
+        $video = $ffmpeg->open($mov);
+        $frame = $video->frame(FFMpeg\Coordinate\TimeCode::fromSeconds($sec));
+        $frame->save($frase);
+        $i++;
+    }
+
 
     return $thumbnail;  
 }
@@ -109,7 +138,7 @@ function obtenirVideosAleatoris()
 {
     $arrayVideos = [];
     $db = connectaDB();
-    $sql = 'SELECT `path` FROM `videos` ORDER BY RAND() LIMIT 5';
+    $sql = 'SELECT `path` FROM `videos` ORDER BY RAND() LIMIT 9';
     $videos = $db->prepare($sql);
     $videos->execute(array());
     $datos = $videos->fetchAll();
