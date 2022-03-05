@@ -15,7 +15,7 @@ require_once('sendMail.php');
             if ($error==90)
             {
                 generateLog($mail,7);
-                sendMail($mail,'Contraseña reseteada correctamente','<h1>Saludos. Le informamos de que su contraseña ha sido reseteada con éxito.</h1> '); 
+                sendMail($mail,'Password reseteado correctamente','<h1>Saludos. Le informamos de que su contraseña ha sido reseteada con éxito.</h1> '); 
                 header('Location: ../index.php?error='.$error);
             }
             else {

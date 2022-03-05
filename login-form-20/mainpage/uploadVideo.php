@@ -3,6 +3,8 @@
     session_start();
 
     if(!isset($_SESSION["user"]))header('Location: ../index.php'); 
+    //TODO cuando se selecciona un video deberiamos cambiar el "Choose file" para que la experiencia de usuario sea mejor, y sepa que se ha seleccionado
+    //TODO bien.
 
 ?>
 

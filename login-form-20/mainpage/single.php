@@ -13,7 +13,7 @@
     $datos = encontrarVideoXpath($video);
     if(count($datos)<1)header('Location: ../index.php'); 
     else{
-
+        //TODO hay que modificar la query ya que el path de Likes y dislikes ha cambiado
         $likes = $datos[0]['likes'];
         $dislikes = $datos[0]['dislikes'];
         $descripcion = $datos[0]['description'];

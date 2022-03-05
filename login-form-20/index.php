@@ -3,7 +3,7 @@ require_once('./php/errorControl.php');
 if (isset($_GET["error"]))
 {
     // El siguiente echo se encarga de limpiar la barra de navegación dejando la ruta base, para que el usuario no vea el GET del error.
-    echo "<script type=\"text/javascript\">window.history.pushState('index', 'Title', '/Cinetics-master/login-form-20/index.php');</script>";  
+    echo "<script type=\"text/javascript\">window.history.pushState('index', 'Title', '/index.php');</script>";  
 }
 ?>
 
@@ -126,9 +126,8 @@ if (isset($_GET["error"]))
                 <div class="card-heading modal-header border-0"></div>
                 <div class="card-body">
                     <h2 class="title modal-title" id="forgotModal">Reset your Password</h2>
+                    <h7 style="color:white">Introduce tu usuario y/o tu mail.</h7>
                     <form method="POST"  action="./php/resetPasswordSend.php" class="modal-body">
-
-
                         <div class="input-group">
                             <input class="input--style-3" type="username" placeholder="Username" name="username">
                         </div>

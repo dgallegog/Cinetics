@@ -13,7 +13,7 @@ if(isset($_GET['path']))
     $video = $_GET['path'].".mp4";
     if(!in_array($video,$videosCarrusel))array_unshift($videosCarrusel,$video);
     // Echo inferior para limpiar la barra del navegador del string que llega por path.
-    echo "<script type=\"text/javascript\">window.history.pushState('index', 'Title', '/Cinetics-master/login-form-20/mainpage/index.php');</script>";
+    echo "<script type=\"text/javascript\">window.history.pushState('index', 'Title', '/mainpage/index.php');</script>";
 }
 
    
@@ -27,8 +27,7 @@ if (count($videosCarrusel)>0){
 
 $miniaturasR =count($miniaturaVid);
 
-//TODO en $videosCarrusel habrá un array con Paths (0 min, 5 max). Falta crear dinamicamente el html
-//TODO para mostrar en función de la variable las miniaturas.
+//TODO eCuando miniaturaVid está vacia (no hay videos en la base de datos) la web explota
 
 
 ?>
