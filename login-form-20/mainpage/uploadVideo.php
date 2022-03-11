@@ -3,9 +3,6 @@
     session_start();
 
     if(!isset($_SESSION["user"]))header('Location: ../index.php'); 
-    //TODO cuando se selecciona un video deberiamos cambiar el "Choose file" para que la experiencia de usuario sea mejor, y sepa que se ha seleccionado
-    //TODO bien.
-
 ?>
 
 <!doctype html>
@@ -18,7 +15,7 @@
             Cinetics</title>
             <link rel="icon" href="../images/favicon.png">
 
-    <link rel="shortcut icon" href="assets/images/fav.jpg">
+    
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/fontawsom-all.min.css">
     <link rel="stylesheet" href="assets/css/animate.css">
@@ -49,8 +46,7 @@
                     <ul class="ulright">
                         <li>
                             <i class="fas fa-cloud-upload-alt"></i>
-                            <a href="./uploadVideo.php">Upload Video
-                            <span>|</span></li>
+                            <a id="uploadvid" href="./uploadVideo.php">Upload Video</a><span>|</span></li>
                             <a class="" href="#" >
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                         <a class="dropdown-item" href="../php/logOut.php">Log Out</a>
@@ -68,7 +64,7 @@
               <div class="container">
                   <div class="row nav-row">
                       <div class="col-md-3 logo">
-                         <img src="assets/images/logo.jpg" alt="">
+                         <img src="./assets/images/logo2.jpg" alt="">
                       </div>
                       <div class="col-md-9 nav-col">
                         <nav class="navbar navbar-expand-lg navbar-light">
@@ -137,7 +133,7 @@
                      
                                             <div class="custom-file">
                                                 <input type="file" class="custom-file-input" id="inputGroupFile01" name="file">
-                                                <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                                                <label class="custom-file-label" id="chooseFile" for="inputGroupFile01">Choose file</label>
                                             </div>
                                             </div>
                                     </div>
@@ -164,11 +160,12 @@
 
 
 </body>
-<script src="assets/js/jquery-3.2.1.min.js"></script>
-<script src="assets/js/popper.min.js"></script>
-<script src="assets/js/bootstrap.min.js"></script>
-<script src="assets/plugins/scroll-fixed/jquery-scrolltofixed-min.js"></script>
-<script src="assets/js/script.js"></script>
 
+<script src="assets/js/uploadvideo.js"></script>
+<script src="assets/js/jquery-3.2.1.min.js"></script>
+    <script src="assets/js/popper.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/plugins/scroll-fixed/jquery-scrolltofixed-min.js"></script>
+    <script src="assets/js/script.js"></script>
 
 </html>

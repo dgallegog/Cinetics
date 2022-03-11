@@ -1,6 +1,7 @@
 <?php
 require_once('logsManager.php');
 require_once('videoManager.php');
+require_once('bddFunciones.php');
 
 
 
@@ -21,7 +22,6 @@ if (($_FILES["file"]["type"] == "video/mp4")
     }
   else
     {
-
     if (file_exists("../upload/" . $_FILES["file"]["name"]))
       {
         
@@ -46,7 +46,7 @@ if (($_FILES["file"]["type"] == "video/mp4")
 else
   {
     $infoCode =  "Invalid file";
-  $errorCode=1;
+    $errorCode=1;
   }
   generateVideoLog($_SESSION["user"],$errorCode,$infoCode);
   if ($errorCode==0){

@@ -23,8 +23,6 @@ CREATE TABLE IF NOT EXISTS `users`(
 
 CREATE TABLE IF NOT EXISTS `videos`(
     `idVideo` INT AUTO_INCREMENT NOT NULL,
-    --`likes` INT UNSIGNED DEFAULT 0, -- Con la nueva tabla videoReactions es redudante tener dos campos aqui para
-    --`dislikes` INT UNSIGNED DEFAULT 0, -- controlar likes y dislikes
     `path` VARCHAR(300) NOT NULL,
     `description` VARCHAR(300) NOT NULL,
     `uploadDate` DATETIME DEFAULT NOW(),

@@ -10,13 +10,20 @@
         $video = $_GET['path'];
         $video= str_replace("png", "mp4", $video);
     }
-    $datos = encontrarVideoXpath($video);
+    $datos=videoExiste($video);
+    
     if(count($datos)<1)header('Location: ../index.php'); 
     else{
-        //TODO hay que modificar la query ya que el path de Likes y dislikes ha cambiado
-        $likes = $datos[0]['likes'];
-        $dislikes = $datos[0]['dislikes'];
+        $idVideo = $datos[0]['idVideo'];
+        $reacciones=recuperarReacciones($idVideo);
         $descripcion = $datos[0]['description'];
+
+        $likes=$reacciones[0]['likes'];
+        $dislikes =$reacciones[0]['dislikes'] ;
+
+        if($likes == null)$likes = 0;
+        if($dislikes ==null)$dislikes=0;
+
     }
 ?>
 
@@ -30,7 +37,7 @@
             Cinetics</title>
             <link rel="icon" href="../images/favicon.png">
 
-    <link rel="shortcut icon" href="assets/images/fav.jpg">
+    
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/fontawsom-all.min.css">
     <link rel="stylesheet" href="assets/css/animate.css">
@@ -61,7 +68,7 @@
                     <ul class="ulright">
                         <li>
                             <i class="fas fa-cloud-upload-alt"></i>
-                            <a href="./uploadVideo.php">Upload Video
+                            <a href="./uploadVideo.php" id="uploadvid">Upload Video
                             <span>|</span></li>
                             <a class="" href="#" >
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
@@ -80,7 +87,7 @@
               <div class="container">
                   <div class="row nav-row">
                       <div class="col-md-3 logo">
-                         <img src="assets/images/logo.jpg" alt="">
+                         <img src="assets/images/logo2.jpg" alt="">
                       </div>
                       <div class="col-md-9 nav-col">
                         <nav class="navbar navbar-expand-lg navbar-light">
@@ -90,7 +97,7 @@
                             </button>
                             <div class="collapse navbar-collapse" id="navbarNav">
                               <ul class="navbar-nav">
-                              <li class="nav-item active">
+                              <li class="nav-item ">
                                     <a class="nav-link" href="index.php">Home
                                     </a>
                                 </li>

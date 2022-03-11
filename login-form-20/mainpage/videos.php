@@ -45,8 +45,7 @@
                     <ul class="ulright">
                         <li>
                             <i class="fas fa-cloud-upload-alt"></i>
-                            <a href="./uploadVideo.php">Upload Video
-                            <span>|</span></li>
+                            <a id="uploadvid" href="./uploadVideo.php">Upload Video</a><span>|</span></li>
                             <a class="" href="#" >
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                         <a class="dropdown-item" href="../php/logOut.php">Log Out</a>
@@ -81,7 +80,7 @@
                         </button>
                         <div class="collapse navbar-collapse" id="navbarNav">
                             <ul class="navbar-nav">
-                                <li class="nav-item active">
+                                <li class="nav-item ">
                                     <a class="nav-link" href="index.php">Home
                                     </a>
                                 </li>
@@ -89,7 +88,7 @@
                                 <li class="nav-item">
                                     <a class="nav-link" href="hashtag.php">Hashtag</a>
                                 </li>
-                                <li class="nav-item">
+                                <li class="nav-item active">
                                     <a class="nav-link" href="videos.php">Videos</a>
                                 </li>
                                

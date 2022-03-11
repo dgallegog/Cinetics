@@ -9,6 +9,7 @@ function generateLog($userOrmail,$code){
         case 5: {$log_filename = "../logs/activation/OK"; break;}
         case 6: {$log_filename = "../logs/pwdReset/send"; break;}
         case 7: {$log_filename = "../logs/pwdReset/OK"; break;}
+        case 8: {$log_filename = "../logs/login/nonActive"; break;}
     }
     $log_msg="[".date('H:i:s')."] Usuario/Mail: ".$userOrmail;
     if (!file_exists($log_filename))

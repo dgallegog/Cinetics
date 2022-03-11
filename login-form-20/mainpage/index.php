@@ -1,11 +1,12 @@
 <?php 
-require_once("../php/videoManager.php");
 
+require_once("../php/bddFunciones.php");
 
 session_start();
    
 if(!isset($_SESSION["user"]))header('Location: ../index.php'); 
 
+$miniaturaVid=array("");
 $videosCarrusel=obtenirVideosAleatoris();
 
 if(isset($_GET['path']))
@@ -27,7 +28,8 @@ if (count($videosCarrusel)>0){
 
 $miniaturasR =count($miniaturaVid);
 
-//TODO eCuando miniaturaVid está vacia (no hay videos en la base de datos) la web explota
+if($miniaturaVid[0]=="")$miniaturaVid[0]="./assets/images/Gigachad.jpg"
+
 
 
 ?>
@@ -43,7 +45,7 @@ $miniaturasR =count($miniaturaVid);
         <title>
             Cinetics</title>
             <link rel="icon" href="../images/favicon.png">
-        <link rel="shortcut icon" href="assets/images/fav.jpg">
+        
         <link rel="stylesheet" href="assets/css/bootstrap.min.css">
         <link rel="stylesheet" href="assets/css/fontawsom-all.min.css">
         <link rel="stylesheet" href="assets/css/animate.css">
@@ -72,8 +74,8 @@ $miniaturasR =count($miniaturaVid);
                     <ul class="ulright">
                         <li>
                             <i class="fas fa-cloud-upload-alt"></i>
-                            <a href="./uploadVideo.php">Upload Video
-                            <span>|</span></li>
+                            <a id="uploadvid" href="./uploadVideo.php">Upload Video</a><span>|</span>
+                            </li>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                         <a class="dropdown-item" href="../php/logOut.php">Log Out</a>
 
@@ -142,7 +144,8 @@ $miniaturasR =count($miniaturaVid);
                                 <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
                             </ol>
                             <div class="carousel-inner">
-                                <div class="carousel-item active ">
+                                <div class="<?php if($miniaturasR<1)echo "d-none";
+                                            else echo "carousel-item active" ?>">
                                     <a href="single.php?path=<?php  echo $miniaturaVid[0] ?>">
                                         <img src="<?php echo $miniaturaVid[0] ?>" width="788" height="443" class="d-block w-100" alt="...">
                                         <div class="detail-card">
