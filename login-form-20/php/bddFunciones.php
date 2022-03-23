@@ -69,10 +69,10 @@ function registerOk ($user,$pwd,$firstname,$lastname,$email,$activationCode)
 {
     $db=connectaDB();
     $pwd = password_hash($pwd,PASSWORD_DEFAULT);
-    
-    $sql = "INSERT INTO `users` (`mail`, `username`, `passHash`, `userFirstName`, `userLastName`,`activationCode`) VALUES (:mail,:user,:pwd,:firstname,:lastname,:activationcode)";  
+    $imgPerfil = "../imgPerfil/anon.jpg";
+    $sql = "INSERT INTO `users` (`mail`, `username`, `passHash`, `userFirstName`, `userLastName`,`activationCode`,`imgPerfilPath`) VALUES (:mail,:user,:pwd,:firstname,:lastname,:activationcode,:imgPerfilPath)";  
         $insert=$db->prepare($sql);
-        $insert->execute(array(':mail'=>$email,':user'=>$user,':pwd'=>$pwd,':firstname'=>$firstname,':lastname'=>$lastname, ':activationcode'=>$activationCode));
+        $insert->execute(array(':mail'=>$email,':user'=>$user,':pwd'=>$pwd,':firstname'=>$firstname,':lastname'=>$lastname, ':activationcode'=>$activationCode,':imgPerfilPath'=>$imgPerfil));
         return $insert;
   
 }
@@ -251,5 +251,34 @@ function obtenirVideosAleatoris()
     $datos = $videos->fetchAll();
     
     return $datos;
+}
+
+
+function generarNombre($usuario)
+{
+    return $usuario.date("YmdHis");
+}
+
+function insertarImagen($user,$path)
+{
+    
+    $db=connectaDB();
+    
+    $sql = 'UPDATE `users` SET `imgPerfilPath`=:pathU WHERE `username`=:user';  
+    $update=$db->prepare($sql);
+    $update->execute(array(':pathU'=>$path,':user' =>$user));
+
+}
+
+function getProfilepic($user)
+{
+       
+    $db=connectaDB();
+    
+    $sql = 'SELECT `imgPerfilPath` FROM `users` WHERE `username`=:user';  
+    $select=$db->prepare($sql);
+    $select->execute(array(':user' =>$user)); 
+    $datos = $select->fetchAll();
+    return $datos[0]['imgPerfilPath'];
 }
 ?>

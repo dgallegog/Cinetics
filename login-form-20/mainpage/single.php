@@ -42,6 +42,7 @@
     <link rel="stylesheet" href="assets/css/fontawsom-all.min.css">
     <link rel="stylesheet" href="assets/css/animate.css">
     <link rel="stylesheet" type="text/css" href="assets/css/style.css" />
+    <link rel="stylesheet" type="text/css" href="assets/css/footer.css"/>
     
     
 </head>
@@ -345,8 +346,8 @@
 
    <!--####################### Footer Starts Here ###################-->
 
-    <div class="copy">
-            <div class="container center">
+   <div class="copy mt-auto align-items-end justify-content-around" >
+            <div class=" center">
               
                 
                 

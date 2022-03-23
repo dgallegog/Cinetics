@@ -8,6 +8,8 @@ CREATE TABLE IF NOT EXISTS `users`(
     `username` VARCHAR(16) UNIQUE NOT NULL,
     `passHash` VARCHAR(60) NOT NULL,
     `userFirstName` VARCHAR(60),
+    `imgPerfilPath` VARCHAR(300),
+    `Biografia` VARCHAR(300),
     `userLastName` VARCHAR(120),
     `creationDate` DATETIME DEFAULT NOW(), 
     `removeDate` DATETIME,

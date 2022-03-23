@@ -9,6 +9,11 @@ $arrayVideos = [];
 $arrayComentarios = [];
 $miniaturaVid=array("");
 $videosCarrusel=obtenirVideosAleatoris();
+
+for($i=1;$i<=8;$i++)
+{
+    $miniaturaVid[$i] = "./images/white.jpg";
+}
 foreach($videosCarrusel as $datos) array_push($arrayVideos,$datos['path']);
 foreach($videosCarrusel as $datos) array_push($arrayComentarios,$datos['description']);
 $videosCarrusel = $arrayVideos;
@@ -31,7 +36,12 @@ if (count($videosCarrusel)>0){
 
 $miniaturasR =count($miniaturaVid);
 
-if($miniaturaVid[0]=="")$miniaturaVid[0]="./assets/images/Gigachad.jpg"
+if($miniaturaVid[0]=="")
+{
+    $miniaturaVid[0]="./assets/images/Gigachad.jpg";
+
+    $arrayComentarios[0] = "Sube el primer video 😎";
+}
 
 
 
@@ -53,6 +63,7 @@ if($miniaturaVid[0]=="")$miniaturaVid[0]="./assets/images/Gigachad.jpg"
         <link rel="stylesheet" href="assets/css/fontawsom-all.min.css">
         <link rel="stylesheet" href="assets/css/animate.css">
         <link rel="stylesheet" type="text/css" href="assets/css/style.css"/>
+        <link rel="stylesheet" type="text/css" href="assets/css/footer.css"/>
     </head>
 
     <body>
@@ -144,8 +155,8 @@ if($miniaturaVid[0]=="")$miniaturaVid[0]="./assets/images/Gigachad.jpg"
                         <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
                             <ol class="carousel-indicators">
                                 <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                                <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                                <?php if($miniaturasR>1) echo "<li data-target='#carouselExampleIndicators' data-slide-to='1'></li>" ?>
+                                <?php if($miniaturasR>2) echo "<li data-target='#carouselExampleIndicators' data-slide-to='2'></li>" ?>
                             </ol>
                             <div class="carousel-inner">
                                 <div class="<?php if($miniaturasR<1)echo "d-none";
@@ -272,20 +283,20 @@ if($miniaturaVid[0]=="")$miniaturaVid[0]="./assets/images/Gigachad.jpg"
                             </a>
                         </div>
                     </div>
-                    <div class="col-lg-3 col-md-4 col-sm-6 <?php if($miniaturasR<8)echo "d-none" ?>">
+                    <div class="col-lg-3 col-md-4 col-sm-6 ">
                         <div class="video-card">
-                                <a href="single.php?path=<?php  echo $miniaturaVid[7] ?>">
-                            <img src="<?php echo $miniaturaVid[7] ?>"  width="238" height="163" alt="">
+                        <?php  if($miniaturasR>=8)echo "<a href='single.php?path='$miniaturaVid[7]'" ?> 
+                        <?php  if($miniaturasR>=8) echo '<img src=" echo $miniaturaVid[7] ?>"  width="238" height="163" alt="">';
+                                else echo '<img src=" ./assets/images/white.jpg ?>"  width="238" height="163" alt="">' ?>
 
                             <div class="row details no-margin">
-                                <h6><?php  echo $arrayComentarios[7] ?></h6>
+                                <h6><?php  if($miniaturasR>=8)echo $arrayComentarios[7] ?></h6>
                                 <div class="col-md-6 col-6 no-padding left">
-                                    <i class="far fa-eye"></i>
-                                    <span></span>
+                                    
                                 </div>
                                 <div class="col-md-6 col-6 no-padding right">
 
-                                    <i class="far fa-comments"></i>
+                                  
                                     <span></span>
                                 </div>
                             </div>
@@ -311,18 +322,18 @@ if($miniaturaVid[0]=="")$miniaturaVid[0]="./assets/images/Gigachad.jpg"
                                 </div>
                             </div>
                             </a>
-
+                            
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
+       
 
         <!--####################### Footer Starts Here ###################-->
 
-        <div class="copy">
-            <div class="container center">
+        <div class="copy justify-content-around mt-auto footer-bs">
+            <div class=" center">
               
                 
                 
@@ -335,6 +346,7 @@ if($miniaturaVid[0]=="")$miniaturaVid[0]="./assets/images/Gigachad.jpg"
             </div>
 
         </div>
+       
     </body>
     <script src="assets/js/jquery-3.2.1.min.js"></script>
     <script src="assets/js/popper.min.js"></script>

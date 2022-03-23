@@ -163,8 +163,8 @@
   	</section>
 
    <!--####################### Footer Starts Here ###################-->
-   <div class="copy">
-            <div class="container center">
+   <div class="copy navbar fixed-bottom justify-content-around" >
+            <div class=" center">
               
                 
                 

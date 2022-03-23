@@ -2,10 +2,7 @@
 require_once('bddFunciones.php');
 require '../vendor/autoload.php';
 
-function generarNombre($usuario)
-{
-    return $usuario.date("YmdHis");
-}
+
 function miniatura($video)
 {
     $sec = 2;

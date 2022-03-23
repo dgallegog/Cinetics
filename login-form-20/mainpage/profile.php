@@ -1,8 +1,12 @@
 <?php
-
+    require("../php/bddFunciones.php");
     session_start();
 
     if(!isset($_SESSION["user"]))header('Location: ../index.php'); 
+
+
+    $profilePic = getProfilepic($_SESSION["user"])
+
 ?>
 
 <!doctype html>
@@ -99,7 +103,7 @@
      <div class="page-nav no-margin row">
             <div class="container">
                 <div class="row">
-                    <h2>Edit Profile</h2>
+                    <h2>Edit Profile   <img src = "<?php echo $profilePic?>" width="50"/></h2>
                     <ul>
                         <li> <a href="./index.php"><i class="fas fa-home"></i> Home</a></li>
                         <li><i class="fas fa-angle-double-right"></i> Edit Profile</li>
@@ -120,7 +124,7 @@
                             <div class="row no-margin video-title" bis_skin_checked="1">
                                     <h6><i class="fas fa-user"></i> Edit your profile</h6>
                                 </div>
-                                <form class="col-md-12" method="POST"  enctype="multipart/form-data" action="../php/uploadBDD.php" >
+                                <form class="col-md-12" method="POST"  enctype="multipart/form-data" action="../php/UploadProfilepic.php" >
                                     <div class="comment-text ">
                                         <div class="form-row  row">
                                             <input type="text" placeholder="Username" class="form-control form-control-sm" name="Username">
@@ -156,19 +160,20 @@
 
 
             <footer>
-                    <div class="d-flex copy">
-                        <div class="container center">
-                        
-                            
-                            
-                            <a href="https://github.com/yudokusora/Cinetics"><i class="fab fa-github"></i></a>
-                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                            <a href="#"><i class="fab fa-pinterest-p"></i></a>
-                            <a href="#"><i class="fab fa-twitter"></i></a>
-                            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <div class="copy navbar fixed-bottom justify-content-around" >
+            <div class=" center">
+              
                 
-                        </div>
-                    </div>
+                
+                <a href="https://github.com/yudokusora/Cinetics"><i class="fab fa-github"></i></a>
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#"><i class="fab fa-pinterest-p"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+       
+            </div>
+
+        </div>
 
 
             </footer>
