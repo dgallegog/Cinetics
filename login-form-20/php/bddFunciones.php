@@ -97,10 +97,13 @@ function comprobarExistentes($user,$email){
 
     $db=connectaDB();
     $sqlUsuari='SELECT `username` FROM `users` WHERE `username`= ?';
-    $sqlMail='SELECT `mail` FROM `users` WHERE `mail`= ?';
     $preparadaUsuari=$db->prepare($sqlUsuari);
     $preparadaUsuari->execute(array($user));
     $usuariRepetits=$preparadaUsuari->rowCount();
+    
+    
+    
+    $sqlMail='SELECT `mail` FROM `users` WHERE `mail`= ?';
     $preparadaMail=$db->prepare($sqlMail);
     $preparadaMail->execute(array($email));
     $emailRepetits=$preparadaMail->rowCount();
@@ -112,7 +115,17 @@ function comprobarExistentes($user,$email){
 
     return $error;
 }
-
+function userexiste($user)
+{
+    $db=connectaDB();
+    $sqlUsuari='SELECT `username` FROM `users` WHERE `username`= ?';
+    $preparadaUsuari=$db->prepare($sqlUsuari);
+    $preparadaUsuari->execute(array($user));
+    $usuariRepetits=$preparadaUsuari->rowCount();
+    $error = 0;
+    if($usuariRepetits)$error = 1;
+    return $error;
+}
 function resetPassPost($resetPassCode,$password)
 {
     $db = connectaDB();
@@ -147,10 +160,6 @@ function resetPassGet($mail,$resetCode)
         }
         return $resetCode;
 }
-function obtenirReaccioVideo($username,$video)
-{
-
-}
 function videoExiste($path)
 {
     $db = connectaDB();
@@ -171,6 +180,19 @@ function recuperarReacciones($idVideo)
     $datos = $codigoOK->fetchAll();
 
     return $datos;
+}
+function obtenerReaccion($user,$idVideo,$reaccion)
+{
+    $db = connectaDB();
+    $sql = 'SELECT `vote` FROM `videoReactions` INNER JOIN `users` ON `idUser`=`usersIduser` WHERE `username`=:user AND `videosIdVideo`=:idVideo AND `vote`=:reaccion';
+    $codigoOK = $db->prepare($sql);
+    $codigoOK->execute(array(':user'=>$user,':idVideo'=>$idVideo,':reaccion'=>$reaccion));
+    $datos = $codigoOK->fetchAll();
+    if (count($datos)==0)
+    {
+        return false;
+    }
+    return true;
 }
 function insertarVideo($username,$path,$description,$hashtags,$title)
 {
@@ -269,7 +291,31 @@ function insertarImagen($user,$path)
     $update->execute(array(':pathU'=>$path,':user' =>$user));
 
 }
+function cambiarUser($olduser,$newuser)
+{
 
+    if(!userexiste($newuser))
+    {
+        $db=connectaDB();
+    
+        $sql = 'UPDATE `users` SET `username`=:newuser WHERE `username`=:olduser';  
+        $update=$db->prepare($sql);
+        $update->execute(array(':olduser'=>$olduser,':newuser' =>$newuser));
+
+
+    }
+
+    
+}
+
+function cambiarBio($user,$newBio)
+{
+    $db=connectaDB();
+    
+    $sql = 'UPDATE `users` SET `Biografia`=:bio WHERE `username`=:user';  
+    $update=$db->prepare($sql);
+    $update->execute(array(':bio'=>$newBio,':user' =>$user));
+}
 function getProfilepic($user)
 {
        

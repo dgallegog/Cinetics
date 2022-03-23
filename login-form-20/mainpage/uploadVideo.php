@@ -158,8 +158,8 @@
                             
                                   
             <footer>
-                    <div class="d-flex copy">
-                        <div class="container center">
+                    <div class="copy navbar fixed-bottom justify-content-around">
+                        <div class=" center">
                         
                             
                             

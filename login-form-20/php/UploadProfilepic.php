@@ -27,12 +27,13 @@ if (in_array($extension, $allowedExts))
 
 if($newuser!="")
 {
-
+    cambiarUser($_SESSION["user"],$newuser);
+    $_SESSION["user"] = $newuser;
 }
 
 if($newBio!="")
 {
-    
+    cambiarBio($_SESSION["user"],$newBio);
 }
 header('Location: ../mainpage/index.php');
 

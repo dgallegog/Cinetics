@@ -10,10 +10,7 @@ $arrayComentarios = [];
 $miniaturaVid=array("");
 $videosCarrusel=obtenirVideosAleatoris();
 
-for($i=1;$i<=8;$i++)
-{
-    $miniaturaVid[$i] = "./images/white.jpg";
-}
+
 foreach($videosCarrusel as $datos) array_push($arrayVideos,$datos['path']);
 foreach($videosCarrusel as $datos) array_push($arrayComentarios,$datos['description']);
 $videosCarrusel = $arrayVideos;
@@ -64,10 +61,13 @@ if($miniaturaVid[0]=="")
         <link rel="stylesheet" href="assets/css/animate.css">
         <link rel="stylesheet" type="text/css" href="assets/css/style.css"/>
         <link rel="stylesheet" type="text/css" href="assets/css/footer.css"/>
+        
     </head>
 
     <body>
 
+    <div id="container">
+        <main>
         <!--####################### Header Starts Here ###################-->
         <header class="continer-fluid ">
     <div class="header-top">
@@ -283,14 +283,14 @@ if($miniaturaVid[0]=="")
                             </a>
                         </div>
                     </div>
-                    <div class="col-lg-3 col-md-4 col-sm-6 ">
-                        <div class="video-card">
-                        <?php  if($miniaturasR>=8)echo "<a href='single.php?path='$miniaturaVid[7]'" ?> 
-                        <?php  if($miniaturasR>=8) echo '<img src=" echo $miniaturaVid[7] ?>"  width="238" height="163" alt="">';
-                                else echo '<img src=" ./assets/images/white.jpg ?>"  width="238" height="163" alt="">' ?>
+                    <div class="col-lg-3 col-md-4 col-sm-6 <?php  if($miniaturasR<8)echo "d-none" ?> ">
+                        <div class="video-card ">
+                        
+                        <a href="single.php?path=<?php  echo $miniaturaVid[7] ?>">
+                            <img src="<?php echo $miniaturaVid[7] ?>"  width="238" height="163" alt="">
 
                             <div class="row details no-margin">
-                                <h6><?php  if($miniaturasR>=8)echo $arrayComentarios[7] ?></h6>
+                                <h6><?php  echo $arrayComentarios[7] ?></h6>
                                 <div class="col-md-6 col-6 no-padding left">
                                     
                                 </div>
@@ -329,10 +329,11 @@ if($miniaturaVid[0]=="")
             </div>
         </div>
        
-
+        </main>
         <!--####################### Footer Starts Here ###################-->
-
-        <div class="copy justify-content-around mt-auto footer-bs">
+        </div>
+        <footer>
+        <div class="copy navbar fixed-bottom justify-content-around">
             <div class=" center">
               
                 
@@ -346,8 +347,9 @@ if($miniaturaVid[0]=="")
             </div>
 
         </div>
-       
+        </footer>
     </body>
+
     <script src="assets/js/jquery-3.2.1.min.js"></script>
     <script src="assets/js/popper.min.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>
