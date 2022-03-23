@@ -5,10 +5,13 @@ require_once("../php/bddFunciones.php");
 session_start();
    
 if(!isset($_SESSION["user"]))header('Location: ../index.php'); 
-
+$arrayVideos = [];
+$arrayComentarios = [];
 $miniaturaVid=array("");
 $videosCarrusel=obtenirVideosAleatoris();
-
+foreach($videosCarrusel as $datos) array_push($arrayVideos,$datos['path']);
+foreach($videosCarrusel as $datos) array_push($arrayComentarios,$datos['description']);
+$videosCarrusel = $arrayVideos;
 if(isset($_GET['path']))
 {
     $video = $_GET['path'].".mp4";
@@ -149,7 +152,7 @@ if($miniaturaVid[0]=="")$miniaturaVid[0]="./assets/images/Gigachad.jpg"
                                     <a href="single.php?path=<?php  echo $miniaturaVid[0] ?>">
                                         <img src="<?php echo $miniaturaVid[0] ?>" width="788" height="443" class="d-block w-100" alt="...">
                                         <div class="detail-card">
-                                            <p>Pictures, abstract symbols the ingredients with symbols the
+                                            <p><?php  echo $arrayComentarios[0] ?>
                                             </p>
                                         </div>
                                     </a>
@@ -159,7 +162,8 @@ if($miniaturaVid[0]=="")$miniaturaVid[0]="./assets/images/Gigachad.jpg"
                                     <a href="single.php?path=<?php  echo $miniaturaVid[1] ?>">
                                         <img src="<?php echo $miniaturaVid[1] ?>" width="788" height="443"  class="d-block w-100" alt="...">
                                         <div class="detail-card">
-                                            <p>Pictures, abstract symbols the ingredients with symbols the
+                                            <p><?php  echo $arrayComentarios[1] ?>
+                                            
                                             </p>
                                         </div>
                                     </a>
@@ -169,7 +173,7 @@ if($miniaturaVid[0]=="")$miniaturaVid[0]="./assets/images/Gigachad.jpg"
                                     <a href="single.php?path=<?php  echo $miniaturaVid[2] ?>">
                                         <img src="<?php echo $miniaturaVid[2] ?>" width="788" height="443"  class="d-block w-100" alt="...">
                                         <div class="detail-card">
-                                            <p>Pictures, abstract symbols the ingredients with symbols the
+                                            <p><?php  echo $arrayComentarios[2] ?>
                                             </p>
                                         </div>
                                     </a>
@@ -200,7 +204,7 @@ if($miniaturaVid[0]=="")$miniaturaVid[0]="./assets/images/Gigachad.jpg"
                                     <a href="single.php?path=<?php  echo $miniaturaVid[3] ?>">
                                 <img src="<?php echo $miniaturaVid[3] ?>"  width="238" height="163"  wialt="">
                                 <div class="detail-card">
-                                    <p>Pictures, abstract symbols the ingredients with</p>
+                                    <p><?php  echo $arrayComentarios[3] ?></p>
                                 </div>
                                 </a>
                             </div>
@@ -208,7 +212,7 @@ if($miniaturaVid[0]=="")$miniaturaVid[0]="./assets/images/Gigachad.jpg"
                                     <a href="single.php?path=<?php  echo $miniaturaVid[4] ?>">
                                 <img src="<?php echo $miniaturaVid[4] ?>"  width="238" height="163" alt="">
                                 <div class="detail-card">
-                                    <p>Pictures, abstract symbols the ingredients with</p>
+                                    <p><?php  echo $arrayComentarios[4] ?></p>
                                 </div>
                                 </a>
                             </div>
@@ -233,15 +237,15 @@ if($miniaturaVid[0]=="")$miniaturaVid[0]="./assets/images/Gigachad.jpg"
                             <img src="<?php echo $miniaturaVid[5] ?>"  width="238" height="163" alt="">
 
                             <div class="row details no-margin">
-                                <h6>Pictures, abstract symbols the ingredients with</h6>
+                                <h6><?php  echo $arrayComentarios[5] ?></h6>
                                 <div class="col-md-6 col-6 no-padding left">
                                     <i class="far fa-eye"></i>
-                                    <span>3,241,234</span>
+                                    <span></span>
                                 </div>
                                 <div class="col-md-6 col-6 no-padding right">
 
                                     <i class="far fa-comments"></i>
-                                    <span>3,241,234</span>
+                                    <span></span>
                                 </div>
                             </div>
                             </a>
@@ -253,15 +257,15 @@ if($miniaturaVid[0]=="")$miniaturaVid[0]="./assets/images/Gigachad.jpg"
                             <img src="<?php echo $miniaturaVid[6] ?>"  width="238" height="163" alt="">
 
                             <div class="row details no-margin">
-                                <h6>Pictures, abstract symbols the ingredients with</h6>
+                                <h6><?php  echo $arrayComentarios[6] ?></h6>
                                 <div class="col-md-6 col-6 no-padding left">
                                     <i class="far fa-eye"></i>
-                                    <span>3,241,234</span>
+                                    <span></span>
                                 </div>
                                 <div class="col-md-6 col-6 no-padding right">
 
                                     <i class="far fa-comments"></i>
-                                    <span>3,241,234</span>
+                                    <span></span>
                                 </div>
                             </div>
                             </a>
@@ -273,15 +277,15 @@ if($miniaturaVid[0]=="")$miniaturaVid[0]="./assets/images/Gigachad.jpg"
                             <img src="<?php echo $miniaturaVid[7] ?>"  width="238" height="163" alt="">
 
                             <div class="row details no-margin">
-                                <h6>Pictures, abstract symbols the ingredients with</h6>
+                                <h6><?php  echo $arrayComentarios[7] ?></h6>
                                 <div class="col-md-6 col-6 no-padding left">
                                     <i class="far fa-eye"></i>
-                                    <span>3,241,234</span>
+                                    <span></span>
                                 </div>
                                 <div class="col-md-6 col-6 no-padding right">
 
                                     <i class="far fa-comments"></i>
-                                    <span>3,241,234</span>
+                                    <span></span>
                                 </div>
                             </div>
                             </a>
@@ -294,15 +298,15 @@ if($miniaturaVid[0]=="")$miniaturaVid[0]="./assets/images/Gigachad.jpg"
                             <img src="<?php echo $miniaturaVid[8] ?>"  width="238" height="163" alt="">
 
                             <div class="row details no-margin">
-                                <h6>Pictures, abstract symbols the ingredients with</h6>
+                                <h6><?php  echo $arrayComentarios[8] ?></h6>
                                 <div class="col-md-6 col-6 no-padding left">
                                     <i class="far fa-eye"></i>
-                                    <span>3,241,234</span>
+                                    <span></span>
                                 </div>
                                 <div class="col-md-6 col-6 no-padding right">
 
                                     <i class="far fa-comments"></i>
-                                    <span>3,241,234</span>
+                                    <span></span>
                                 </div>
                             </div>
                             </a>

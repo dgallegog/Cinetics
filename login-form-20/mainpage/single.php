@@ -17,7 +17,7 @@
         $idVideo = $datos[0]['idVideo'];
         $reacciones=recuperarReacciones($idVideo);
         $descripcion = $datos[0]['description'];
-
+        $titulo = $datos[0]['title'];
         $likes=$reacciones[0]['likes'];
         $dislikes =$reacciones[0]['dislikes'] ;
 
@@ -121,10 +121,10 @@
      <div class="page-nav no-margin row">
             <div class="container">
                 <div class="row">
-                    <h2>Bootstrap HTML Form Design</h2>
+                    <h2><?php echo $titulo ?></h2>
                     <ul>
                         <li> <a href="#"><i class="fas fa-home"></i> Home</a></li>
-                        <li><i class="fas fa-angle-double-right"></i> HTML Form Design</li>
+                        <li><i class="fas fa-angle-double-right"></i><?php echo $titulo ?></li>
                     </ul>
                 </div>
             </div>

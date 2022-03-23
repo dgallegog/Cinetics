@@ -154,7 +154,7 @@ function obtenirReaccioVideo($username,$video)
 function videoExiste($path)
 {
     $db = connectaDB();
-    $sql = 'SELECT `idVideo`,`description` FROM `videos` WHERE `path`=:patho';
+    $sql = 'SELECT `idVideo`,`description`,`title` FROM `videos` WHERE `path`=:patho';
     $codigoOK = $db->prepare($sql);
     $codigoOK->execute(array(':patho'=>$path));
     $datos = $codigoOK->fetchAll();
@@ -172,14 +172,14 @@ function recuperarReacciones($idVideo)
 
     return $datos;
 }
-function insertarVideo($username,$path,$description,$hashtags)
+function insertarVideo($username,$path,$description,$hashtags,$title)
 {
     $user = getIduser($username);
     $db=connectaDB();
     //insert del video a la bdd (path). 
-    $sql = "INSERT INTO `videos`(`path`,`description`,`usersIduser`)VALUES(:pathU,:descriptionU,:usersIduser)";  
+    $sql = "INSERT INTO `videos`(`path`,`description`,`usersIduser`,title)VALUES(:pathU,:descriptionU,:usersIduser,:title)";  
     $insert=$db->prepare($sql);
-    $insert->execute(array(':pathU'=>$path,':descriptionU'=>$description,':usersIduser'=>$user));
+    $insert->execute(array(':pathU'=>$path,':descriptionU'=>$description,':usersIduser'=>$user,':title'=>$title));
     //con hacer el insert anterior, recuperar la idVideo asignada
     $idVideo = $db->lastInsertId();
     if (count($hashtags)>0){    
@@ -245,11 +245,11 @@ function obtenirVideosAleatoris()
 {
     $arrayVideos = [];
     $db = connectaDB();
-    $sql = 'SELECT `path` FROM `videos` ORDER BY RAND() LIMIT 9';
+    $sql = 'SELECT `path`,`description` FROM `videos` ORDER BY RAND() LIMIT 9';
     $videos = $db->prepare($sql);
     $videos->execute(array());
     $datos = $videos->fetchAll();
-    foreach($datos as $video) array_push($arrayVideos,$video['path']);
-    return $arrayVideos;
+    
+    return $datos;
 }
 ?>

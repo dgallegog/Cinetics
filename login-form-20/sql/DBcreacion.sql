@@ -23,6 +23,7 @@ CREATE TABLE IF NOT EXISTS `users`(
 
 CREATE TABLE IF NOT EXISTS `videos`(
     `idVideo` INT AUTO_INCREMENT NOT NULL,
+    `title` VARCHAR(100) NOT NULL,
     `path` VARCHAR(300) NOT NULL,
     `description` VARCHAR(300) NOT NULL,
     `uploadDate` DATETIME DEFAULT NOW(),

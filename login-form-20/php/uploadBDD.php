@@ -32,6 +32,7 @@ if (($_FILES["file"]["type"] == "video/mp4")
       {
         $hashtags = montarHastags($_POST["Hashtags"]);
         $nombreArchivo = generarNombre($_SESSION["user"]);
+       
       move_uploaded_file($_FILES["file"]["tmp_name"],
       "../upload/" . $nombreArchivo.".mp4");
       $path="../upload/".$nombreArchivo;
@@ -39,7 +40,7 @@ if (($_FILES["file"]["type"] == "video/mp4")
       
       miniatura($path);
       $description=$_POST["description"];
-      insertarVideo($_SESSION["user"],$path.".mp4",$description,$hashtags);
+      insertarVideo($_SESSION["user"],$path.".mp4",$description,$hashtags,$_POST["Title"]);
       }
     } 
   }
