@@ -2,11 +2,11 @@
 
 
 function connectaDB(){
-    //$cadenaConnexio = 'mysql:dbname=cinetics;host=localhost:3307'; // Conexion Gerard
-    $cadenaConnexio = 'mysql:dbname=cinetics;host=localhost'; //Conexion Gallego
+    $cadenaConnexio = 'mysql:dbname=cinetics;host=localhost:3307'; // Conexion Gerard
+    //$cadenaConnexio = 'mysql:dbname=cinetics;host=localhost'; //Conexion Gallego
     $usuari = 'root';
-    $passwd = '1234'; //Gallego
-    //$passwd = '';//Gerard
+    //$passwd = '1234'; //Gallego
+    $passwd = '';//Gerard
    
     try{
         $db = new PDO($cadenaConnexio, $usuari, $passwd, 
@@ -193,6 +193,31 @@ function obtenerReaccion($user,$idVideo,$reaccion)
         return false;
     }
     return true;
+}
+function  reaccionaAvideo($username,$idVideo,$codigo) {
+    $user=getIduser($username);
+    $db = connectaDB();
+    switch ($codigo){
+        case 1:{ // Insert nuevo de una reaccion de LIKE
+            $sql = "INSERT INTO `videoReactions` VALUES (:idVideo,:user,1)";
+            break;
+        }
+        case 2: { // Insert nuevo de una reaccion de DISLIKE
+            $sql = "INSERT INTO `videoReactions` VALUES (:idVideo,:user,0)";
+            break;
+        }
+        case 3:{ // Cambio de una reaccion de DISLIKE a LIKE
+            $sql = "UPDATE `videoReactions` SET `vote`=1 WHERE `videosIdVideo`=:idVideo AND `usersIduser`=:user";
+            break;
+        }
+        case 4:{ // Cambio de una reaccion de LIKE a DISLIKE 
+            $sql = "UPDATE `videoReactions` SET `vote`=0 WHERE `videosIdVideo`=:idVideo AND `usersIduser`=:user";
+            break;
+        }
+    }
+    $codigoOK = $db->prepare($sql);
+    $codigoOK->execute(array(':idVideo'=>$idVideo,':user'=>$user));
+
 }
 function insertarVideo($username,$path,$description,$hashtags,$title)
 {

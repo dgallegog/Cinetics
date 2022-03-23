@@ -27,8 +27,10 @@ if (in_array($extension, $allowedExts))
 
 if($newuser!="")
 {
-    cambiarUser($_SESSION["user"],$newuser);
-    $_SESSION["user"] = $newuser;
+    if (getIdUser($newuser)==null){
+        cambiarUser($_SESSION["user"],$newuser);
+        $_SESSION["user"] = $newuser;
+    }
 }
 
 if($newBio!="")

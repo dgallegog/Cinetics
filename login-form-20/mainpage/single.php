@@ -8,7 +8,7 @@
     else
     {
         $video = $_GET['path'];
-        $video= str_replace("png", "mp4", $video);
+        if (strpos($video, "png")>0)$video= str_replace("png", "mp4", $video);
     }
     $datos=videoExiste($video);
     
@@ -181,10 +181,30 @@
 
                            
                             <p></p><div class="container"> 
-                                <a class="like" href="<?php  if(!$haFetLike) { if ($haFetDislike){echo './reacciona.php?code=3&idVideo='.$idVideo;}else {echo './reacciona.php?code=1&idVideo='.$idVideo;}}?>"><i class="fa fa-thumbs-up"></i>  
+                                <a class="<?php if($haFetLike)echo 'liked';else echo 'like'; ?>" href="<?php  
+                                if(!$haFetLike) { 
+                                    if ($haFetDislike){
+                                        echo './reacciona.php?code=3&idVideo='.$idVideo;
+                                        }
+                                    else {
+                                        echo './reacciona.php?code=1&idVideo='.$idVideo;
+                                        }
+                                }
+                                else {  echo './reacciona.php?code=0&idVideo='.$idVideo;
+                                }?>"><i class="fa fa-thumbs-up"></i>  
                                     Like <input class="qty1" name="qty1" readonly="readonly" type="text" value="<?php echo $likes ?>" />
                                 </a>
-                                <a class="dislike"><i class="fa fa-thumbs-down"></i> 
+                                <a class="<?php if($haFetDislike)echo 'disliked';else echo 'dislike'; ?>" href="<?php
+                                if(!$haFetDislike) { 
+                                    if ($haFetLike){
+                                        echo './reacciona.php?code=4&idVideo='.$idVideo;
+                                        }
+                                    else {
+                                        echo './reacciona.php?code=2&idVideo='.$idVideo;
+                                        }
+                                }
+                                else { echo './reacciona.php?code=0&idVideo='.$idVideo;}
+                                ?>"><i class="fa fa-thumbs-down"></i> 
                                     Dislikes <input class="qty2"  name="qty2" readonly="readonly" type="text" value="<?php echo $dislikes ?>" />
                                 </a>
                             </div>

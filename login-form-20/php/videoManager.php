@@ -10,10 +10,10 @@ function miniatura($video)
     $thumbnail = $video.".png";
     
     $ffmpeg = FFMpeg\FFMpeg::create(array(
-        'ffmpeg.binaries' => 'C:\Users\david\Downloads\ffmpeg-master-latest-win64-gpl\bin\ffmpeg.exe', //Gallego
-        'ffprobe.binaries' => 'C:\Users\david\Downloads\ffmpeg-master-latest-win64-gpl\bin\ffprobe.exe', //Gallego
-        //'ffmpeg.binaries' => 'C:\Users\Gerard\Downloads\ffmpeg-master-latest-win64-gpl\bin\ffmpeg.exe',//Gerard
-        //'ffprobe.binaries' => 'C:\Users\Gerard\Downloads\ffmpeg-master-latest-win64-gpl\bin\ffprobe.exe',//Gerard
+        //'ffmpeg.binaries' => 'C:\Users\david\Downloads\ffmpeg-master-latest-win64-gpl\bin\ffmpeg.exe', //Gallego
+        //'ffprobe.binaries' => 'C:\Users\david\Downloads\ffmpeg-master-latest-win64-gpl\bin\ffprobe.exe', //Gallego
+        'ffmpeg.binaries' => 'C:\Users\Gerard\Downloads\ffmpeg-master-latest-win64-gpl\bin\ffmpeg.exe',//Gerard
+        'ffprobe.binaries' => 'C:\Users\Gerard\Downloads\ffmpeg-master-latest-win64-gpl\bin\ffprobe.exe',//Gerard
         'timeout' => 3600, // The timeout for the underlying process
         'ffmpeg.threads' => 12, // The number of threads that FFMpeg should use
         ));
@@ -36,10 +36,10 @@ function miniaturas($video,$i)
         array_push($thumbnail,$frase);
         
         $ffmpeg = FFMpeg\FFMpeg::create(array(
-            'ffmpeg.binaries' => 'C:\Users\david\Downloads\ffmpeg-master-latest-win64-gpl\bin\ffmpeg.exe', //Gallego
-            'ffprobe.binaries' => 'C:\Users\david\Downloads\ffmpeg-master-latest-win64-gpl\bin\ffprobe.exe', //Gallego
-            //'ffmpeg.binaries' => 'C:\Users\Gerard\Downloads\ffmpeg-master-latest-win64-gpl\bin\ffmpeg.exe',//Gerard
-            //'ffprobe.binaries' => 'C:\Users\Gerard\Downloads\ffmpeg-master-latest-win64-gpl\bin\ffprobe.exe',//Gerard
+            //'ffmpeg.binaries' => 'C:\Users\david\Downloads\ffmpeg-master-latest-win64-gpl\bin\ffmpeg.exe', //Gallego
+            //'ffprobe.binaries' => 'C:\Users\david\Downloads\ffmpeg-master-latest-win64-gpl\bin\ffprobe.exe', //Gallego
+            'ffmpeg.binaries' => 'C:\Users\Gerard\Downloads\ffmpeg-master-latest-win64-gpl\bin\ffmpeg.exe',//Gerard
+            'ffprobe.binaries' => 'C:\Users\Gerard\Downloads\ffmpeg-master-latest-win64-gpl\bin\ffprobe.exe',//Gerard
             'timeout' => 3600, // The timeout for the underlying process
             'ffmpeg.threads' => 12, // The number of threads that FFMpeg should use
             ));
