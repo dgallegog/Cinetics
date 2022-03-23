@@ -62,3 +62,16 @@ CREATE TABLE IF NOT EXISTS `videoReactions`(
     CONSTRAINT `fk_videoReactions_users` FOREIGN KEY (`usersIduser`) REFERENCES `users`(`idUser`)
     ON UPDATE CASCADE ON DELETE CASCADE
 );
+
+CREATE TABLE IF NOT EXISTS `videoComments`(
+    `videosIdVideo` INT,
+    `usersIduser` INT,
+    `comment` VARCHAR(200),
+    `date` DATETIME DEFAULT NOW(),
+    PRIMARY KEY (`videosIdVideo`,`usersIduser`,`date`),
+
+    CONSTRAINT `fk_videoComments_videos` FOREIGN KEY (`videosIdVideo`) REFERENCES `videos`(`idVideo`)
+        ON UPDATE CASCADE ON DELETE CASCADE,
+    CONSTRAINT `fk_videoComments_users` FOREIGN KEY (`usersIduser`) REFERENCES `users`(`idUser`)
+    ON UPDATE CASCADE ON DELETE CASCADE
+);
