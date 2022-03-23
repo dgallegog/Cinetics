@@ -75,7 +75,7 @@
                             </button>
                             <div class="collapse navbar-collapse" id="navbarNav">
                               <ul class="navbar-nav">
-                              <li class="nav-item active">
+                              <li class="nav-item ">
                                     <a class="nav-link" href="index.php">Home
                                     </a>
                                 </li>
@@ -99,10 +99,10 @@
      <div class="page-nav no-margin row">
             <div class="container">
                 <div class="row">
-                    <h2>Upload Video</h2>
+                    <h2>Edit Profile</h2>
                     <ul>
                         <li> <a href="./index.php"><i class="fas fa-home"></i> Home</a></li>
-                        <li><i class="fas fa-angle-double-right"></i> Upload Video</li>
+                        <li><i class="fas fa-angle-double-right"></i> Edit Profile</li>
                     </ul>
                 </div>
             </div>
@@ -118,45 +118,43 @@
                            
                             
                             <div class="row no-margin video-title" bis_skin_checked="1">
-                                    <h6><i class="fas fa-book"></i> Post Your Video</h6>
+                                    <h6><i class="fas fa-user"></i> Edit your profile</h6>
                                 </div>
                                 <form class="col-md-12" method="POST"  enctype="multipart/form-data" action="../php/uploadBDD.php" >
                                     <div class="comment-text ">
                                         <div class="form-row  row">
-                                            <input type="text" placeholder="Title" class="form-control form-control-sm" name="Title">
+                                            <input type="text" placeholder="Username" class="form-control form-control-sm" name="Username">
                                         </div>
 
-                                        <div class="form-row row">
-                                                <input type="text" placeholder="Hashtags" class="form-control form-control-sm" name="Hashtags">
-                                        </div>
+
                                         <div class="form-row row">
                                         <div class="input-group mb-3">
                      
                                             <div class="custom-file">
-                                                <input type="file" class="custom-file-input" id="inputGroupFile01" name="file">
-                                                <label class="custom-file-label" id="chooseFile" for="inputGroupFile01">Choose file</label>
+                                                <input type="file" class="custom-file-input" id="inputGroupFile01" name="ProfilePic">
+                                                <label class="custom-file-label" id="chooseFile" for="inputGroupFile01">Choose profile picture</label>
                                             </div>
+                                        </div>
+                                        </div>
+                                            <div class="form-row row">
+                                                    <textarea placeholder="Biography" name="Biography"  rows="5" class="form-control form-control-sm"></textarea>
                                             </div>
-                                    </div>
-                                        <div class="form-row row">
-                                                <textarea placeholder="Description" name="description"  rows="5" class="form-control form-control-sm"></textarea>
+                                            <div class="form-row row ">
+                                                <button type = "submit" class="btn btn-danger uploadVideo">Save</button>
+                                            </div>
                                         </div>
-                                        <div class="form-row row ">
-                                            <button type = "submit" class="btn btn-danger uploadVideo">Upload</button>
-                                        </div>
-                                    </div>
                                     </form>     
                             </div>
                     </div>
-                </div>
-            </div>
-      </div>
-
-
+                    </div>
+                    </div>
                         
                         
                             
                                   
+                    </div>
+
+
             <footer>
                     <div class="d-flex copy">
                         <div class="container center">
@@ -174,20 +172,18 @@
 
 
             </footer>
-
-
-
+</body>
+<script src="assets/js/jquery-3.2.1.min.js"></script>
+<script src="assets/js/popper.min.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
+<script src="assets/plugins/scroll-fixed/jquery-scrolltofixed-min.js"></script>
+<script src="assets/js/script.js"></script>
 
    <!--####################### Footer Starts Here ###################-->
 
 
-</body>
 
-<script src="assets/js/uploadvideo.js"></script>
-<script src="assets/js/jquery-3.2.1.min.js"></script>
-    <script src="assets/js/popper.min.js"></script>
-    <script src="assets/js/bootstrap.min.js"></script>
-    <script src="assets/plugins/scroll-fixed/jquery-scrolltofixed-min.js"></script>
-    <script src="assets/js/script.js"></script>
+
+
 
 </html>

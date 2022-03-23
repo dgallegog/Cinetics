@@ -72,7 +72,8 @@
                             <span>|</span></li>
                             <a class="" href="#" >
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item" href="../php/logOut.php">Log Out</a>
+                            <a class="dropdown-item" href="./profile.php">Profile</a>
+                            <a class="dropdown-item" href="../php/logOut.php">Log Out</a>
 
                         </div>
                         <li class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
