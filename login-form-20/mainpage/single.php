@@ -40,6 +40,7 @@
         $estrellasDislike=0;
         if (($likes+$dislikes)>0){
             $likesSobretotal=($likes/($likes+$dislikes))*100; // Esto dará, por ejemplo, 6 likes sobre 10 votos, 60.
+            $estrellasDislike=10;
             if ($likesSobretotal>0){ // Verificamos que no ha dado NAN 
                 $estrellasLike=intdiv($likesSobretotal,10); // Nos da un int entre 0 y 10
                 $estrellaMezcla=($likesSobretotal%10)>0; // Nos permite saber si hay residuo y por ello colocar media estrella
