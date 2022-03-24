@@ -2,12 +2,12 @@
 
 
 function connectaDB(){
-    //$cadenaConnexio = 'mysql:dbname=cinetics;host=localhost:3307'; // Conexion Gerard
-    //$passwd = '';//Gerard
+    $cadenaConnexio = 'mysql:dbname=cinetics;host=localhost:3307'; // Conexion Gerard
+    $passwd = '';//Gerard
     
-    $cadenaConnexio = 'mysql:dbname=cinetics;host=localhost'; //Conexion Gallego
+    //$cadenaConnexio = 'mysql:dbname=cinetics;host=localhost'; //Conexion Gallego
     $usuari = 'root';
-    $passwd = '1234'; //Gallego
+    //$passwd = '1234'; //Gallego
     
    
     try{

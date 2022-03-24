@@ -221,6 +221,7 @@
                             <div class="row no-margin video-title" bis_skin_checked="1">
                                 <h6><i class="fas fa-book"></i> <?php  echo count($comentarios)  ?> Comments</h6>
                             </div>
+                            <p></p> 
 
                             <div class="comment-container">
                                

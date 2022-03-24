@@ -51,7 +51,7 @@ else
   }
   generateVideoLog($_SESSION["user"],$errorCode,$infoCode);
   if ($errorCode==0){
-    header('Location: ../mainpage/index.php?path='.$path);
+    header('Location: ../mainpage/single.php?path='.$path.'.mp4');
     exit;
   }
   else {
