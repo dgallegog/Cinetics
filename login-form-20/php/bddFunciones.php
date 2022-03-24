@@ -470,7 +470,12 @@ function top4hashtags(){
     return $datos;    
 }
 function top10videos($idHashtag){
-
+    $db = connectaDB();
+    $sql= 'SELECT SUM(`vote`) `likes`,`idVideo`,`title`,`path`,`description` FROM `videoReactions` INNER JOIN `videos` ON `videoReactions`.`videosIdVideo`=`idVideo` INNER JOIN `videoHashtags` ON `idVideo`=`videoHashtags`.`videosIdVideo` WHERE `videohashtags`.`hashtagsIdHashtag`=:idHashtag GROUP BY `idVideo` ORDER BY `likes` DESC';
+    $codigoOK = $db->prepare($sql);
+    $codigoOK->execute(array(':idHashtag'=>$idHashtag));
+    $datos = $codigoOK->fetchAll();
+    return $datos; 
 }
 
 function ejecutarQuery($key)
