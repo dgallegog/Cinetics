@@ -20,7 +20,12 @@ if(isset($_GET["path"]) && isset($_GET["desc"]))
    
 }
 
-  
+else if(isset($_GET["hashtag"]))
+{
+    $videosCarrusel = top10videos($_GET["hashtag"]);
+    foreach($videosCarrusel as $datos) array_push($arrayVideos,$datos['path']);
+    foreach($videosCarrusel as $datos) array_push($arrayComentarios,$datos['description']);
+}
 else{
 
     $videosCarrusel=obtenirVideosAleatoris();

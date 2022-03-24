@@ -151,31 +151,31 @@
   	        <div class="row">
   	            <div class="col-md-4 col-sm-6 <?php if($hastagcount<1)echo "d-none" ?>">
   	                <div class="single-sess">
-  	                    <img src="<?php echo $portadas[0] ?>" width = "100vw" alt="">
+  	                    <a href="./index.php?hashtag=<?php echo $hastags[0]["idHashtag"]?>"><img src="<?php echo $portadas[0] ?>" width = "100vw" alt=""></a>
   	                    <p><?php echo $hastags[0]["tag"] ?></p>
   	                </div>
   	            </div>
   	            <div class="col-md-4 col-sm-6 <?php if($hastagcount<2)echo "d-none" ?>">
   	                <div class="single-sess">
-  	                    <img src="<?php echo $portadas[1] ?>" alt="">
+                      <a href="./index.php?hashtag=<?php echo $hastags[1]["idHashtag"]?>"><img src="<?php echo $portadas[1] ?>" alt=""></a>
   	                    <p><?php echo $hastags[1]["tag"] ?></p>
   	                </div>
   	            </div>
   	            <div class="col-md-4 col-sm-6 <?php if($hastagcount<3)echo "d-none" ?>">
   	                <div class="single-sess">
-  	                    <img src="<?php echo $portadas[2] ?>" alt="">
+                      <a href="./index.php?hashtag=<?php echo $hastags[2]["idHashtag"]?>"> <img src="<?php echo $portadas[2] ?>" alt=""></a>
   	                    <p><?php echo $hastags[2]["tag"] ?></p>
   	                </div>
   	            </div>
   	            <div class="col-md-4 col-sm-6 <?php if($hastagcount<4)echo "d-none" ?>">
   	                <div class="single-sess">
-  	                    <img src="<?php echo $portadas[3] ?>" alt="">
+                      <a href="./index.php?hashtag=<?php echo $hastags[3]["idHashtag"]?>"><img src="<?php echo $portadas[3] ?>" alt=""></a>
   	                    <p><?php echo $hastags[3]["tag"] ?></p>
   	                </div>
   	            </div>
   	            <div class="col-md-4 col-sm-6 <?php if($hastagcount<5)echo "d-none" ?>">
   	                <div class="single-sess">
-  	                    <img src="<?php echo $portadas[4] ?>" alt="">
+                      <a href="./index.php?hashtag=<?php echo $hastags[4]["idHashtag"]?>"> <img src="<?php echo $portadas[4] ?>" alt=""></a>
   	                    <p><?php echo $hastags[4]["tag"] ?></p>
   	                </div>
   	            </div>
