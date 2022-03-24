@@ -471,7 +471,7 @@ function top5hashtags(){
 }
 function top10videos($idHashtag){
     $db = connectaDB();
-    $sql= 'SELECT SUM(`vote`) `likes`,`idVideo`,`title`,`path`,`description` FROM `videoReactions` INNER JOIN `videos` ON `videoReactions`.`videosIdVideo`=`idVideo` INNER JOIN `videoHashtags` ON `idVideo`=`videoHashtags`.`videosIdVideo` WHERE `videohashtags`.`hashtagsIdHashtag`=:idHashtag GROUP BY `idVideo` ORDER BY `likes` DESC LIMIT 10';
+    $sql= 'SELECT SUM(`vote`) `likes`,`idVideo`,`title`,`path`,`description` FROM `videoReactions` INNER JOIN `videos` ON `videoReactions`.`videosIdVideo`=`idVideo` INNER JOIN `videoHashtags` ON `idVideo`=`videoHashtags`.`videosIdVideo` WHERE `videoHashtags`.`hashtagsIdHashtag`=:idHashtag GROUP BY `idVideo` ORDER BY `likes` DESC LIMIT 10';
     $codigoOK = $db->prepare($sql);
     $codigoOK->execute(array(':idHashtag'=>$idHashtag));
     $datos = $codigoOK->fetchAll();
@@ -480,7 +480,7 @@ function top10videos($idHashtag){
 
 function randomPortadaHashtag($idHashtag){
     $db = connectaDB();
-    $sql= 'SELECT `path` FROM `videoHashtags` INNER JOIN `videos` ON `videosIdVideo`=`idVideo` WHERE `videohashtags`.`hashtagsIdHashtag`=:idHashtag GROUP BY `idVideo` LIMIT 1 ';
+    $sql= 'SELECT `path` FROM `videoHashtags` INNER JOIN `videos` ON `videosIdVideo`=`idVideo` WHERE `videoHashtags`.`hashtagsIdHashtag`=:idHashtag GROUP BY `idVideo` LIMIT 1 ';
     $codigoOK = $db->prepare($sql);
     $codigoOK->execute(array(':idHashtag'=>$idHashtag));
     $datos = $codigoOK->fetchAll();
