@@ -219,6 +219,33 @@ function  reaccionaAvideo($username,$idVideo,$codigo) {
     $codigoOK->execute(array(':idVideo'=>$idVideo,':user'=>$user));
 
 }
+
+function analitzaReaccio($haFetLike,$haFetDislike,$idVideo,$codi){
+    if ($codi==1){
+        if(!$haFetLike) { 
+            if ($haFetDislike){
+                $link= './reacciona.php?code=3&idVideo='.$idVideo;
+                }
+            else {
+                $link= './reacciona.php?code=1&idVideo='.$idVideo;
+                }
+        }
+        else {  $link= './reacciona.php?code=0&idVideo='.$idVideo;
+        }
+    }
+    else {
+        if(!$haFetDislike) { 
+            if ($haFetLike){
+                $link= './reacciona.php?code=4&idVideo='.$idVideo;
+                }
+            else {
+                $link= './reacciona.php?code=2&idVideo='.$idVideo;
+                }
+        }
+        else { $link= './reacciona.php?code=0&idVideo='.$idVideo;}
+    }
+    return $link;
+}
 function insertarVideo($username,$path,$description,$hashtags,$title)
 {
     $user = getIduser($username);

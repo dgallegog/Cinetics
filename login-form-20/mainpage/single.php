@@ -28,6 +28,18 @@
         $haFetLike=obtenerReaccion($_SESSION["user"],$idVideo,"1");
         $haFetDislike=obtenerReaccion($_SESSION["user"],$idVideo,"0");
 
+        // Aqui calculamos la proporcion de likes sobre el total para saber cuantas estrellas poner
+        $likesSobretotal=($likes/($likes+$dislikes))*100; // Esto dará, por ejemplo, 6 likes sobre 10 votos, 60.
+        $estrellasCompletas=0;
+        $mediaEstrella=false;
+        $estrellasVacias=10;
+        if ($likesSobretotal>0){ // Verificamos que no ha dado NAN 
+            $estrellasCompletas=intdiv($likesSobretotal,10); // Nos da un int entre 0 y 10
+            $mediaEstrella=($likesSobretotal%10)>0; // Nos permite saber si hay residuo y por ello colocar media estrella
+            $estrellasVacias=10-$estrellasCompletas-$mediaEstrella; // Obtenemos las estrellas vacias restando las completas y el bool activo o no (1,0)
+        }
+
+
     }
 ?>
 
@@ -181,36 +193,23 @@
 
                            
                             <p></p><div class="container"> 
-                                <a class="<?php if($haFetLike)echo 'liked';else echo 'like'; ?>" href="<?php  
-                                if(!$haFetLike) { 
-                                    if ($haFetDislike){
-                                        echo './reacciona.php?code=3&idVideo='.$idVideo;
-                                        }
-                                    else {
-                                        echo './reacciona.php?code=1&idVideo='.$idVideo;
-                                        }
-                                }
-                                else {  echo './reacciona.php?code=0&idVideo='.$idVideo;
-                                }?>"><i class="fa fa-thumbs-up"></i>  
+                                <a class="<?php if($haFetLike)echo 'liked';else echo 'like'; ?>" href="<?php echo analitzaReaccio($haFetLike,$haFetDislike,$idVideo,1)?>"><i class="fa fa-thumbs-up"></i>  
                                     Like <input class="qty1" name="qty1" readonly="readonly" type="text" value="<?php echo $likes ?>" />
                                 </a>
-                                <a class="<?php if($haFetDislike)echo 'disliked';else echo 'dislike'; ?>" href="<?php
-                                if(!$haFetDislike) { 
-                                    if ($haFetLike){
-                                        echo './reacciona.php?code=4&idVideo='.$idVideo;
-                                        }
-                                    else {
-                                        echo './reacciona.php?code=2&idVideo='.$idVideo;
-                                        }
-                                }
-                                else { echo './reacciona.php?code=0&idVideo='.$idVideo;}
-                                ?>"><i class="fa fa-thumbs-down"></i> 
+                                <a class="<?php if($haFetDislike)echo 'disliked';else echo 'dislike'; ?>" href="<?php echo analitzaReaccio($haFetLike,$haFetDislike,$idVideo,0)?>"><i class="fa fa-thumbs-down"></i> 
                                     Dislikes <input class="qty2"  name="qty2" readonly="readonly" type="text" value="<?php echo $dislikes ?>" />
                                 </a>
                             </div>
-                            <p><?php echo $descripcion ?>
-                            </p>
-
+                            <div class="row no-margin video-title" bis_skin_checked="1">
+                                <h6>Description: </h6>
+                                <p><?php echo $descripcion ?></p>
+                            </div>
+                            <p></p>
+                            <div class="row no-margin video-title" bis_skin_checked="1">
+                                <h6>Hashtags: </h6>
+                                <p><?php echo "Aqui van los hashtags" ?></p>
+                            </div>
+                            <p></p>
                             <div class="row no-margin video-title" bis_skin_checked="1">
                                 <h6><i class="fas fa-book"></i> 3 Comments</h6>
                             </div>
