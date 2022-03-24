@@ -5,10 +5,10 @@ function connectaDB(){
     $cadenaConnexio = 'mysql:dbname=cinetics;host=localhost:3307'; // Conexion Gerard
     $passwd = '';//Gerard
     
-    //$cadenaConnexio = 'mysql:dbname=cinetics;host=localhost'; //Conexion Gallego
+    $cadenaConnexio = 'mysql:dbname=cinetics;host=localhost'; //Conexion Gallego
     $usuari = 'root';
-    //$passwd = '1234'; //Gallego
-    
+    $passwd = '1234'; //Gallego
+    //$passwd = 'root'; //server
    
     try{
         $db = new PDO($cadenaConnexio, $usuari, $passwd, 
@@ -333,7 +333,7 @@ function obtenirVideoAleatori()
 }
 function obtenirVideosAleatoris()
 {
-    $arrayVideos = [];
+   
     $db = connectaDB();
     $sql = 'SELECT `path`,`description` FROM `videos` ORDER BY RAND() LIMIT 9';
     $videos = $db->prepare($sql);
@@ -342,6 +342,25 @@ function obtenirVideosAleatoris()
     
     return $datos;
 }
+
+function obtenirVideosHashtagAleatoris($hashtags)
+{
+    $arrayVideos = [];
+    $db = connectaDB();
+    $hashtags = substr_replace($hashtags ,"", -1);
+    $tag = str_replace('#',"",$hashtags);
+    $tag = str_replace(' ','" OR tag="',$tag);
+    $tag = 'tag="'.$tag.'"';
+
+    //"`tag`='durum' OR `tag`='triste'"
+    $sql = 'SELECT DISTINCT `path`,`description` FROM `videos` INNER JOIN `videoHashtags` ON `videosIdVideo`=`idVideo` INNER JOIN  `hashtags` ON  `idHashtag`=`hashtagsIdHashtag` WHERE  '.$tag.'  ORDER BY RAND() LIMIT 5';
+    $videos = $db->prepare($sql);
+    $videos->execute(array());
+    $datos = $videos->fetchAll();
+   
+    return $datos;
+}
+
 
 
 function generarNombre($usuario)
@@ -440,5 +459,29 @@ function construyeCadenaHashtags($hashtags){
         $cadenaHashtags=$cadenaHashtags.'#'.$hashtag["tag"].' ';
     }
     return $cadenaHashtags;
+}
+
+function top4hashtags(){
+    $db = connectaDB();
+    $sql = 'SELECT COUNT(`hashtagsIdHashtag`) `qtt`,`tag`,`idHashtag` FROM `hashtags` INNER JOIN `videoHashtags` ON `idHashtag`=`hashtagsIdHashtag` GROUP BY `tag` ORDER BY `qtt` DESC LIMIT 4';
+    $codigoOK = $db->prepare($sql);
+    $codigoOK->execute(array());
+    $datos = $codigoOK->fetchAll();
+    return $datos;    
+}
+function top10videos($idHashtag){
+
+}
+
+function ejecutarQuery($key)
+{
+    $db = connectaDB();
+    $key = "%".$key."%";
+    $sql = 'SELECT `path`,`description` FROM `videos` WHERE `description` LIKE :keys or `title` LIKE :keys ORDER BY RAND() LIMIT 9';
+    $videos = $db->prepare($sql);
+    $videos->execute(array(':keys'=>$key));
+    $datos = $videos->fetchAll();
+    
+    return $datos;
 }
 ?>

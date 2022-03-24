@@ -14,6 +14,9 @@
     
     if(count($datos)<1)header('Location: ../index.php'); 
     else{
+
+        
+
         $idVideo = $datos[0]['idVideo'];
         $reacciones=recuperarReacciones($idVideo);
 
@@ -21,7 +24,24 @@
         $hashtags=recuperarHashtags($idVideo);
         $cadenaHashtags=construyeCadenaHashtags($hashtags);
 
+        $arrayVideos = [];
+        $arrayComentarios =[];
+       
 
+        $videosCarrusel=obtenirVideosHashtagAleatoris($cadenaHashtags);
+
+
+        foreach($videosCarrusel as $z) array_push($arrayVideos,$z['path']);
+        foreach($videosCarrusel as $z) array_push($arrayComentarios,$z['description']);
+        $videosCarrusel = $arrayVideos;
+        if (count($videosCarrusel)>0){
+            // Aqui estoy filtrando para cuando no hay videos en la bdd. actualmente el html se fastidia ya que depende de miniaturaVid.
+            
+            $miniaturaVid = str_replace("mp4", "png", $videosCarrusel);
+          
+        }
+
+        $miniaturasR =count($miniaturaVid);  
         $descripcion = $datos[0]['description'];
         $titulo = $datos[0]['title'];
         $likes=$reacciones[0]['likes'];
@@ -114,7 +134,7 @@
               <div class="container">
                   <div class="row nav-row">
                       <div class="col-md-3 logo">
-                         <img src="assets/images/logo2.jpg" alt="">
+                         <a href="./index.php"><img src="assets/images/logo2.jpg" alt=""></a>
                       </div>
                       <div class="col-md-9 nav-col">
                         <nav class="navbar navbar-expand-lg navbar-light">
@@ -132,9 +152,21 @@
                                 <li class="nav-item">
                                     <a class="nav-link" href="hashtag.php">Hashtag</a>
                                 </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="videos.php">Videos</a>
-                                </li>
+                                <li>
+                               <div class="input-group">
+                                   <form action="../php/buscarVid.php" method="POST">
+                                    <div class="form-outline">
+                                    <input type="search" id="form1" class="form-control" name="keys" placeholder="search for video"/>
+                                   
+                                    </div>
+                               </li>
+                               <li>
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                                </form>
+                                </div>
+                               </li>
                               </ul>
                             </div>
                           </nav>   
@@ -159,6 +191,13 @@
 
 
       <!--####################### Video Blog Starts Here ###################-->
+      
+     
+
+
+                        
+      
+      <div class="container">
       <div class="  container-fluid video-blog">
       <div class="player d-flex justify-content-center ">
 
@@ -188,12 +227,6 @@
     </div>
 </div>
       </div>
-     
-
-
-                        
-      
-      <div class="container">
                 <div class="row">
                     <div class="col-md-8">
                         <div class="row no-margin video-cover">
@@ -275,58 +308,57 @@
                         <div class="row no-margin video-title">
                             <h6><i class="fas fa-book"></i> Related Videos</h6>
                         </div>
-                        <div class="contri-bghy">
+                        <div class="contri-bghy <?php if($miniaturasR<1)echo "d-none" ?> ">
                             <div class="image">
-                                <img src="assets/images/video/b1.jpg" alt="">
+                                <a href="single.php?path=<?php  echo $miniaturaVid[0] ?>"><img height="80vh"src="<?php echo $miniaturaVid[0]?>" alt=""></a>
                             </div>
                             <div class="detail">
-                                <h6>Pictures, abstract symbols the ingredients with</h6>
+                                <h6><?php echo $arrayComentarios[0]?></h6>
                                
-                                <span>Posted on: 2018</span>
+                               
                             </div>
                         </div>
 
-                        <div class="contri-bghy">
+                        <div class="contri-bghy <?php if($miniaturasR<2)echo "d-none" ?>">
                                 <div class="image">
-                                    <img src="assets/images/video/b2.jpg" alt="">
+                                <a href="single.php?path=<?php  echo $miniaturaVid[1] ?>"><img height="80vh"src="<?php echo $miniaturaVid[1]?>" alt=""></a>
                                 </div>
                                 <div class="detail">
-                                    <h6>Pictures, abstract symbols the ingredients with</h6>
+                                <h6><?php echo $arrayComentarios[1]?></h6>
                                    
-                                    <span>Posted on: 2018</span>
+                                   
                                 </div>
                             </div>
 
-                            <div class="contri-bghy">
+                            <div class="contri-bghy <?php if($miniaturasR<3)echo "d-none" ?>">
                                     <div class="image">
-                                        <img src="assets/images/video/b3.jpg" alt="">
+                                    <a href="single.php?path=<?php  echo $miniaturaVid[2] ?>"> <img height="80vh"src="<?php echo $miniaturaVid[2]?>" alt=""></a>
                                     </div>
                                     <div class="detail">
-                                        <h6>Pictures, abstract symbols the ingredients with</h6>
+                                    <h6><?php echo $arrayComentarios[2]?></h6>
                                        
-                                        <span>Posted on: 2018</span>
+                                       
                                     </div>
                                 </div>
 
-                                <div class="contri-bghy">
+                                <div class="contri-bghy <?php if($miniaturasR<4)echo "d-none" ?>">
                                         <div class="image">
-                                            <img src="assets/images/video/b4.jpg" alt="">
+                                        <a href="single.php?path=<?php  echo $miniaturaVid[3] ?>"><img height="80vh"src="<?php echo $miniaturaVid[3]?>" alt=""></a>
                                         </div>
                                         <div class="detail">
-                                            <h6>Pictures, abstract symbols the ingredients with</h6>
+                                        <h6><?php echo $arrayComentarios[3]?></h6>
                                            
-                                            <span>Posted on: 2018</span>
+                                           
                                         </div>
                                     </div>
 
-                                    <div class="contri-bghy">
+                                    <div class="contri-bghy <?php if($miniaturasR<5)echo "d-none" ?>">
                                             <div class="image">
-                                                <img src="assets/images/video/b5.jpg" alt="">
+                                            <a href="single.php?path=<?php  echo $miniaturaVid[4] ?>"><img height="80vh"src="<?php echo $miniaturaVid[4]?>" alt=""></a>
                                             </div>
                                             <div class="detail">
-                                                <h6>Pictures, abstract symbols the ingredients with</h6>
+                                            <h6><?php echo $arrayComentarios[4]?></h6>
                                                
-                                                <span>Posted on: 2018</span>
                                             </div>
                                         </div>
                                        

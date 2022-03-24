@@ -69,7 +69,7 @@
               <div class="container">
                   <div class="row nav-row">
                       <div class="col-md-3 logo">
-                         <img src="./assets/images/logo2.jpg" alt="">
+                        <a href="./index.php"> <img src="./assets/images/logo2.jpg" alt=""> </a>
                       </div>
                       <div class="col-md-9 nav-col">
                         <nav class="navbar navbar-expand-lg navbar-light">
@@ -87,9 +87,21 @@
                                 <li class="nav-item">
                                     <a class="nav-link" href="hashtag.php">Hashtag</a>
                                 </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="videos.php">Videos</a>
-                                </li>
+                                <li>
+                               <div class="input-group">
+                                   <form action="../php/buscarVid.php" method="POST">
+                                    <div class="form-outline">
+                                    <input type="search" id="form1" class="form-control" name="keys" placeholder="search for video"/>
+                                   
+                                    </div>
+                               </li>
+                               <li>
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                                </form>
+                                </div>
+                               </li>
                               </ul>
                             </div>
                           </nav>   

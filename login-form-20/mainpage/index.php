@@ -8,19 +8,33 @@ if(!isset($_SESSION["user"]))header('Location: ../index.php');
 $arrayVideos = [];
 $arrayComentarios = [];
 $miniaturaVid=array("");
-$videosCarrusel=obtenirVideosAleatoris();
 
-
-foreach($videosCarrusel as $datos) array_push($arrayVideos,$datos['path']);
-foreach($videosCarrusel as $datos) array_push($arrayComentarios,$datos['description']);
-$videosCarrusel = $arrayVideos;
-if(isset($_GET['path']))
+if(isset($_GET["path"]) && isset($_GET["desc"]))
 {
-    $video = $_GET['path'].".mp4";
-    if(!in_array($video,$videosCarrusel))array_unshift($videosCarrusel,$video);
-    // Echo inferior para limpiar la barra del navegador del string que llega por path.
-    echo "<script type=\"text/javascript\">window.history.pushState('index', 'Title', '/mainpage/index.php');</script>";
+
+    $arrayVideos = explode(",",$_GET["path"]);
+    array_pop($arrayVideos);
+    $arrayComentarios = explode(",",$_GET["desc"]);
+    array_pop($arrayComentarios);
+    echo "<script type=\"text/javascript\">window.history.pushState('index', 'Title', './index.php');</script>";  
+   
 }
+
+  
+else{
+
+    $videosCarrusel=obtenirVideosAleatoris();
+    foreach($videosCarrusel as $datos) array_push($arrayVideos,$datos['path']);
+    foreach($videosCarrusel as $datos) array_push($arrayComentarios,$datos['description']);
+    
+}
+
+$videosCarrusel = $arrayVideos;
+
+
+
+
+
 
    
 
@@ -109,7 +123,7 @@ if($miniaturaVid[0]=="")
         <div class="container">
             <div class="row nav-row">
                 <div class="col-md-3 logo">
-                    <img src="assets/images/logo2.jpg" alt="">
+                <a href="./index.php"> <img src="assets/images/logo2.jpg" alt=""> </a>
                 </div>
                 <div class="col-md-9 nav-col">
                     <nav class="navbar navbar-expand-lg navbar-light">
@@ -134,13 +148,29 @@ if($miniaturaVid[0]=="")
                                 <li class="nav-item">
                                     <a class="nav-link" href="hashtag.php">Hashtag</a>
                                 </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="videos.php">Videos</a>
-                                </li>
-                               
-                               
+
+                                
+
+                               <li>
+                               <div class="input-group">
+                                   <form action="../php/buscarVid.php" method="POST">
+                                    <div class="form-outline">
+                                    <input type="search" id="form1" class="form-control" name="keys" placeholder="search for video"/>
+                                   
+                                    </div>
+                               </li>
+                               <li>
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                                </form>
+                                </div>
+                               </li>
+                              
                             </ul>
+
                         </div>
+                       
                     </nav>
                 </div>
             </div>

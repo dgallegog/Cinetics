@@ -11,7 +11,7 @@ $extension = pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION);
 $infoCode = "";
 $errorCode=0;
 if (($_FILES["file"]["type"] == "video/mp4")
-&& ($_FILES["file"]["size"] < 10000000)
+&& ($_FILES["file"]["size"] < 1000000000)
 && in_array($extension, $allowedExts))
 
   {

@@ -11,15 +11,15 @@ function sendMail ($destinatario,$subject,$mensaje)
     $mail->SMTPDebug = 0;
     $mail->SMTPAuth = true;
     $mail->SMTPSecure = 'tls';
-    $mail->Host = 'smtp.gmail.com';
+    $mail->Host = 'smtp.ionos.es';
     $mail->Port = 587;
     
     //Credencials del compte GMAIL
-    $mail->Username = 'cinetics.noreply@gmail.com';
-    $mail->Password = 'cineticsdager';
+    $mail->Username = 'cinetics@osore.org';
+    $mail->Password = 'CineticsDager!21';
 
     //Dades del correu electrònic
-    $mail->SetFrom('cinetics.noreply@gmail.com','Cinetics');
+    $mail->SetFrom('cinetics@osore.org','Cinetics');
     $mail->Subject = $subject;
     $mail->MsgHTML($mensaje);
     //$mail->addAttachment("fitxer.pdf");
