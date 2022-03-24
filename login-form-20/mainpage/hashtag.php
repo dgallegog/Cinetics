@@ -1,8 +1,24 @@
 <?php 
 
+    require_once("../php/bddFunciones.php");
     session_start();
 
     if(!isset($_SESSION["user"]))header('Location: ../index.php'); 
+
+    $hastags = top5hashtags();
+
+    $hastagcount = count($hastags);
+
+
+    $portadas = [];
+
+    foreach($hastags as $datos)
+    {
+        array_push($portadas,randomPortadaHashtag($datos["idHashtag"]));
+    }
+    
+    $portadas = str_replace("mp4", "png", $portadas);
+    
 
 ?>
 
@@ -133,43 +149,37 @@
   	    <div class="container">
            
   	        <div class="row">
-  	            <div class="col-md-4 col-sm-6">
+  	            <div class="col-md-4 col-sm-6 <?php if($hastagcount<1)echo "d-none" ?>">
   	                <div class="single-sess">
-  	                    <img src="assets/images/session/therapy-1.jpg" alt="">
-  	                    <p>Individual Therapy</p>
+  	                    <img src="<?php echo $portadas[0] ?>" width = "100vw" alt="">
+  	                    <p><?php echo $hastags[0]["tag"] ?></p>
   	                </div>
   	            </div>
-  	            <div class="col-md-4 col-sm-6">
+  	            <div class="col-md-4 col-sm-6 <?php if($hastagcount<2)echo "d-none" ?>">
   	                <div class="single-sess">
-  	                    <img src="assets/images/session/therapy-2.jpg" alt="">
-  	                    <p>Cuple Therapy</p>
+  	                    <img src="<?php echo $portadas[1] ?>" alt="">
+  	                    <p><?php echo $hastags[1]["tag"] ?></p>
   	                </div>
   	            </div>
-  	            <div class="col-md-4 col-sm-6">
+  	            <div class="col-md-4 col-sm-6 <?php if($hastagcount<3)echo "d-none" ?>">
   	                <div class="single-sess">
-  	                    <img src="assets/images/session/therapy-3.jpg" alt="">
-  	                    <p>online Session</p>
+  	                    <img src="<?php echo $portadas[2] ?>" alt="">
+  	                    <p><?php echo $hastags[2]["tag"] ?></p>
   	                </div>
   	            </div>
-  	            <div class="col-md-4 col-sm-6">
+  	            <div class="col-md-4 col-sm-6 <?php if($hastagcount<4)echo "d-none" ?>">
   	                <div class="single-sess">
-  	                    <img src="assets/images/session/therapy-4.jpg" alt="">
-  	                    <p>Group Therapy</p>
+  	                    <img src="<?php echo $portadas[3] ?>" alt="">
+  	                    <p><?php echo $hastags[3]["tag"] ?></p>
   	                </div>
   	            </div>
-  	            <div class="col-md-4 col-sm-6">
+  	            <div class="col-md-4 col-sm-6 <?php if($hastagcount<5)echo "d-none" ?>">
   	                <div class="single-sess">
-  	                    <img src="assets/images/session/therapy-5.jpg" alt="">
-  	                    <p>All Age Group</p>
+  	                    <img src="<?php echo $portadas[4] ?>" alt="">
+  	                    <p><?php echo $hastags[4]["tag"] ?></p>
   	                </div>
   	            </div>
-  	            <div class="col-md-4 col-sm-6">
-  	                <div class="single-sess sess-ok">
-  	                   <h4>Start Your Session today</h4>
-  	                    <p>Take the first step on your journey to feeling better. </p>
-  	                    <button class="btn btn-danger">View all Hashtag</button>
-  	                </div>
-  	            </div>
+
   	        </div>
   	    </div>
   	</section>

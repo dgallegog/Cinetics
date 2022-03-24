@@ -281,14 +281,10 @@ if($miniaturaVid[0]=="")
                             <div class="row details no-margin">
                                 <h6><?php  echo $arrayComentarios[5] ?></h6>
                                 <div class="col-md-6 col-6 no-padding left">
-                                    <i class="far fa-eye"></i>
+                                   
                                     <span></span>
                                 </div>
-                                <div class="col-md-6 col-6 no-padding right">
 
-                                    <i class="far fa-comments"></i>
-                                    <span></span>
-                                </div>
                             </div>
                             </a>
                         </div>
@@ -301,14 +297,10 @@ if($miniaturaVid[0]=="")
                             <div class="row details no-margin">
                                 <h6><?php  echo $arrayComentarios[6] ?></h6>
                                 <div class="col-md-6 col-6 no-padding left">
-                                    <i class="far fa-eye"></i>
+                                   
                                     <span></span>
                                 </div>
-                                <div class="col-md-6 col-6 no-padding right">
 
-                                    <i class="far fa-comments"></i>
-                                    <span></span>
-                                </div>
                             </div>
                             </a>
                         </div>
@@ -342,14 +334,10 @@ if($miniaturaVid[0]=="")
                             <div class="row details no-margin">
                                 <h6><?php  echo $arrayComentarios[8] ?></h6>
                                 <div class="col-md-6 col-6 no-padding left">
-                                    <i class="far fa-eye"></i>
+                                  
                                     <span></span>
                                 </div>
-                                <div class="col-md-6 col-6 no-padding right">
-
-                                    <i class="far fa-comments"></i>
-                                    <span></span>
-                                </div>
+    
                             </div>
                             </a>
                             
