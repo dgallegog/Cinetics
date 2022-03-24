@@ -18,6 +18,8 @@
         $reacciones=recuperarReacciones($idVideo);
 
         $comentarios = recuperarComentarios($idVideo);
+        $hashtags=recuperarHashtags($idVideo);
+        $cadenaHashtags=construyeCadenaHashtags($hashtags);
 
 
         $descripcion = $datos[0]['description'];
@@ -212,7 +214,7 @@
                             <p></p>
                             <div class="row no-margin video-title" bis_skin_checked="1">
                                 <h6>Hashtags: </h6>
-                                <p><?php echo "Aqui van los hashtags" ?></p>
+                                <p><?php if ($cadenaHashtags!="")echo $cadenaHashtags;else echo 'Este video no tiene ningún hashtag vinculado'; ?></p>
                             </div>
                             <p></p>
                             <div class="row no-margin video-title" bis_skin_checked="1">

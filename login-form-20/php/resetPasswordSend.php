@@ -29,7 +29,7 @@
 
         if($update->rowCount()>0)
         {
-            sendMail($email,"Resetea tu password en Cinetics",'<h1>Resetea tu password pulsando <a href="http://localhost/php/resetPassword.php?resetCode='.$resetCode.'&mail='.$email.'">aqui.</a></h1> ');
+            sendMail($email,"Resetea tu password en Cinetics",'<h1>Resetea tu password pulsando <a href="http://'.$_SERVER['SERVER_NAME'].'/php/resetPassword.php?resetCode='.$resetCode.'&mail='.$email.'">aqui.</a></h1> ');
             generateLog($email,6);
             header('Location: ../index.php?error=91');
         }

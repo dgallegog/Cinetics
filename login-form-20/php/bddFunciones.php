@@ -423,5 +423,22 @@ function recuperarComentarios($idVideo)
     }
     return $datos;
 }
+function recuperarHashtags($idVideo)
+{
+    $db = connectaDB();
+    $sql = 'SELECT `tag` FROM `hashtags` INNER JOIN `videoHashtags` ON `idHashtag`=`hashtagsIdHashtag` WHERE `videosIdVideo`=:idVideo';
+    $codigoOK = $db->prepare($sql);
+    $codigoOK->execute(array(':idVideo'=>$idVideo));
+    $datos = $codigoOK->fetchAll();
+    return $datos;
+}
 
+function construyeCadenaHashtags($hashtags){
+    $cadenaHashtags="";
+    foreach($hashtags as $hashtag)
+    {
+        $cadenaHashtags=$cadenaHashtags.'#'.$hashtag["tag"].' ';
+    }
+    return $cadenaHashtags;
+}
 ?>

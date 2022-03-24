@@ -16,7 +16,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             $insert = registerOk($username,filter_input(INPUT_POST,'password'),filter_input(INPUT_POST,'firstname'),filter_input(INPUT_POST,'lastname'),$email,$activationCode);   
             if($insert)
             {  
-                sendMail($email,'Activa tu cuenta ahora','<h1>Activa tu cuenta pulsando <a href="http://localhost/php/activaCuenta.php?activationCode='.$activationCode.'&mail='.$email.'">aqui.</a></h1> ');     
+                sendMail($email,'Activa tu cuenta ahora','<h1>Activa tu cuenta pulsando <a href="http://'.$_SERVER['SERVER_NAME'].'/php/activaCuenta.php?activationCode='.$activationCode.'&mail='.$email.'">aqui.</a></h1> ');     
                 generateLog($email,4);           
             }       
         }
