@@ -16,6 +16,10 @@
     else{
         $idVideo = $datos[0]['idVideo'];
         $reacciones=recuperarReacciones($idVideo);
+
+        $comentarios = recuperarComentarios($idVideo);
+
+
         $descripcion = $datos[0]['description'];
         $titulo = $datos[0]['title'];
         $likes=$reacciones[0]['likes'];
@@ -29,17 +33,17 @@
         $haFetDislike=obtenerReaccion($_SESSION["user"],$idVideo,"0");
 
         // Aqui calculamos la proporcion de likes sobre el total para saber cuantas estrellas poner
-        $likesSobretotal=($likes/($likes+$dislikes))*100; // Esto dará, por ejemplo, 6 likes sobre 10 votos, 60.
-        $estrellasCompletas=0;
-        $mediaEstrella=false;
-        $estrellasVacias=10;
-        if ($likesSobretotal>0){ // Verificamos que no ha dado NAN 
-            $estrellasCompletas=intdiv($likesSobretotal,10); // Nos da un int entre 0 y 10
-            $mediaEstrella=($likesSobretotal%10)>0; // Nos permite saber si hay residuo y por ello colocar media estrella
-            $estrellasVacias=10-$estrellasCompletas-$mediaEstrella; // Obtenemos las estrellas vacias restando las completas y el bool activo o no (1,0)
+        $estrellasLike=0;
+        $estrellaMezcla=false;
+        $estrellasDislike=0;
+        if (($likes+$dislikes)>0){
+            $likesSobretotal=($likes/($likes+$dislikes))*100; // Esto dará, por ejemplo, 6 likes sobre 10 votos, 60.
+            if ($likesSobretotal>0){ // Verificamos que no ha dado NAN 
+                $estrellasLike=intdiv($likesSobretotal,10); // Nos da un int entre 0 y 10
+                $estrellaMezcla=($likesSobretotal%10)>0; // Nos permite saber si hay residuo y por ello colocar media estrella
+                $estrellasDislike=10-$estrellasLike-$estrellaMezcla; // Obtenemos las estrellas vacias restando las completas y el bool activo o no (1,0)
+            }
         }
-
-
     }
 ?>
 
@@ -199,6 +203,7 @@
                                 <a class="<?php if($haFetDislike)echo 'disliked';else echo 'dislike'; ?>" href="<?php echo analitzaReaccio($haFetLike,$haFetDislike,$idVideo,0)?>"><i class="fa fa-thumbs-down"></i> 
                                     Dislikes <input class="qty2"  name="qty2" readonly="readonly" type="text" value="<?php echo $dislikes ?>" />
                                 </a>
+                                <?php for($i=0; $i<$estrellasLike;$i++)echo '<i class="fa fa-star" style="font-size:24px;color:rgb(29, 179, 49)"></i>'; if ($estrellaMezcla) echo '<i class="fa fa-star" style="font-size:24px;color:rgb(110, 99, 34)"></i>'; for($i=0; $i<$estrellasDislike;$i++) echo '<i class="fa fa-star" style="font-size:24px;color:rgb(192, 19, 19)"></i>'; ?>
                             </div>
                             <div class="row no-margin video-title" bis_skin_checked="1">
                                 <h6>Description: </h6>
@@ -211,69 +216,52 @@
                             </div>
                             <p></p>
                             <div class="row no-margin video-title" bis_skin_checked="1">
-                                <h6><i class="fas fa-book"></i> 3 Comments</h6>
+                                <h6><i class="fas fa-book"></i> <?php  echo count($comentarios)  ?> Comments</h6>
                             </div>
 
                             <div class="comment-container">
-                                <div class="comment-box row">
-                                    <div class="col-2 mghji">
-                                        <img src="assets/images/testimonial/member-01.jpg" alt="">
-                                    </div>
-                                    <div class="col-10 detaila">
-                                        <h6>Mr. Mical James</h6>
-                                        <small>Published on 19-06-2019</small>
-                                        <p>In this video, you will learn how to create a stylish appointment
-                                             form from scratch using HTML, CSS, and Bootstrap Download the Project</p>
-                                    </div>
+                               
+                            <?php 
+                            
+                            foreach($comentarios as $comment)
+                            {
+                                echo '<div class="comment-box row">
+                                <div class="col-2 mghji">
+                                    <img src="'.$comment["profilepic"].'" alt="">
                                 </div>
-                                <div class="comment-box row">
-                                        <div class="col-2 mghji">
-                                            <img src="assets/images/testimonial/member-01.jpg" alt="">
-                                        </div>
-                                        <div class="col-10 detaila">
-                                            <h6>Mr. Mical James</h6>
-                                            <small>Published on 19-06-2019</small>
-                                            <p>In this video, you will learn how to create a stylish appointment
-                                                 form from scratch using HTML, CSS, and Bootstrap Download the Project</p>
-                                        </div>
-                                    </div>
-                                    <div class="comment-box row">
-                                            <div class="col-2 mghji">
-                                                <img src="assets/images/testimonial/member-01.jpg" alt="">
-                                            </div>
-                                            <div class="col-10 detaila">
-                                                <h6>Mr. Mical James</h6>
-                                                <small>Published on 19-06-2019</small>
-                                                <p>In this video, you will learn how to create a stylish appointment
-                                                     form from scratch using HTML, CSS, and Bootstrap Download the Project</p>
-                                            </div>
-                                        </div>
+                                <div class="col-10 detaila">
+                                    <h6>'.$comment["usersIduser"].'</h6>
+                                    <small>Published on '.$comment["date"].'</small>
+                                    <p>'.$comment["comment"].'</p>
+                                </div>
+                            </div>';
+                            }
+                            
+                            
+                            
+                            ?>
+                
                             </div>
 
-                            
+                            <form  method="POST"  class="col-md-12" action="../php/comment.php" >
                             <div class="row no-margin video-title" bis_skin_checked="1">
                                     <h6><i class="fas fa-book"></i> Post Your Comment</h6>
                                 </div>
-
+                        
                             <div class="comment-text ">
-                                <div class="form-row  row">
-                                    <input type="text" placeholder=" Enter Name" class="form-control form-control-sm">
-                                </div>
+                                
+                                <input id="hiddenPath" name = "hiddenPath" type="hidden" value="<?php echo $_GET['path']?>" /> 
+                                <input id="vidId" name="vidId" type="hidden" value="<?php echo $idVideo ?>" />
                                 <div class="form-row row">
-                                        <input type="text" placeholder="Enter Mobile number" class="form-control form-control-sm">
-                                </div>
-                                <div class="form-row row">
-                                        <input type="text" placeholder="Enter Email Address" class="form-control form-control-sm">
-                                </div>
-                                <div class="form-row row">
-                                        <textarea placeholder="Enter Comment"   rows="5" class="form-control form-control-sm"></textarea>
+                                        <textarea placeholder="Enter Comment"  name="comment" rows="5" class="form-control form-control-sm"  maxlength="200"></textarea>
                                  </div>
                                  <div class="form-row row">
-                                       <button class="btn btn-danger">Post Comment</button>
+                                       <button class="btn btn-danger" type = "submit">Post Comment</button>
                                  </div>
                             </div>
-                        </div>
-                        
+                            
+                        </div>  
+                        </form>
                         
                         
                             

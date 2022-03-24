@@ -2,11 +2,13 @@
 
 
 function connectaDB(){
-    $cadenaConnexio = 'mysql:dbname=cinetics;host=localhost:3307'; // Conexion Gerard
-    //$cadenaConnexio = 'mysql:dbname=cinetics;host=localhost'; //Conexion Gallego
+    //$cadenaConnexio = 'mysql:dbname=cinetics;host=localhost:3307'; // Conexion Gerard
+    //$passwd = '';//Gerard
+    
+    $cadenaConnexio = 'mysql:dbname=cinetics;host=localhost'; //Conexion Gallego
     $usuari = 'root';
-    //$passwd = '1234'; //Gallego
-    $passwd = '';//Gerard
+    $passwd = '1234'; //Gallego
+    
    
     try{
         $db = new PDO($cadenaConnexio, $usuari, $passwd, 
@@ -84,6 +86,16 @@ function getIdUser($username){
     $datos = $select ->fetchAll();
     return $datos[0]['iduser'];    
 }
+
+function getNameusername($idusername){
+    $db=connectaDB();
+    $sql = "SELECT `username` FROM `users` WHERE `iduser`=:user";  
+    $select=$db->prepare($sql);
+    $select->execute(array(':user'=>$idusername));
+    $datos = $select ->fetchAll();
+    return $datos[0]['username'];    
+}
+
 function updateLastSignIn ($user)
 {
     $db=connectaDB();   
@@ -181,6 +193,10 @@ function recuperarReacciones($idVideo)
 
     return $datos;
 }
+
+
+
+
 function obtenerReaccion($user,$idVideo,$reaccion)
 {
     $db = connectaDB();
@@ -379,4 +395,33 @@ function getProfilepic($user)
     $datos = $select->fetchAll();
     return $datos[0]['imgPerfilPath'];
 }
+
+function bbdComentario($user,$comment,$vidId)
+{
+    $db=connectaDB();
+    $user = getIdUser($user);
+    $sql = "INSERT INTO `videoComments`(`videosIdVideo`, `usersIduser`, `comment`) VALUES (:videosIdVideo,:usersIduser,:comment)";
+    $insert=$db->prepare($sql);
+    $insert->execute(array(':videosIdVideo'=>$vidId,':usersIduser'=>$user,':comment'=>$comment));
+}
+
+
+function recuperarComentarios($idVideo)
+{
+    $db = connectaDB();
+    $sql = 'SELECT `usersIduser`,`comment`,`date` FROM `videoComments` WHERE `videosIdVideo`=:idVideo';
+    $codigoOK = $db->prepare($sql);
+    $codigoOK->execute(array(':idVideo'=>$idVideo));
+    $datos = $codigoOK->fetchAll();
+    $i=0;
+    foreach($datos as $peqDat)
+    {
+        
+        $datos[$i]["usersIduser"] = getNameusername($peqDat["usersIduser"] );
+        $datos[$i]["profilepic"] = getProfilepic($datos[$i]["usersIduser"]);
+        $i++;
+    }
+    return $datos;
+}
+
 ?>

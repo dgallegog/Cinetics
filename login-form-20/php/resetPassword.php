@@ -43,16 +43,27 @@ require_once('sendMail.php');
 
 <head>
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <link href="../css/resetpass.css" rel="stylesheet" >
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="../login-form-20/css/resetpass.css">
+    
     
 </head>
 <!------ Include the above in your HEAD tag ---------->
 
-<div class="container">
-	<div class="row">
-		<div class="col-sm-4 center">
+<style> 
+.center {
+  margin: auto;
+  width: 50%;
+  
+  padding: 10px;
+}
+
+</style>
+<body class="align-content-center">
+<div class="container center">
+	<div class="">
+		<div class="col-sm-8 center">
              <form method="POST"  onsubmit="return veripass()" action="<?php echo $_SERVER['PHP_SELF']; ?>"  class="signin-form">
                 <label >New Password</label>
                 <div class="form-group pass_show"> 
@@ -75,5 +86,6 @@ require_once('sendMail.php');
 		</div>  
 	</div>
 </div>
-<script src="../login-form-20/js/resetpass.js"></script>
+</body>
+<script src="../js/resetpass.js"></script>
 </html>
